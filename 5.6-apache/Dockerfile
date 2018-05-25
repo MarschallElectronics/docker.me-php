@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:5.6-apache
 
 # Default Server ENV
 ENV SERVER_NAME me-base.garmisch.net
@@ -16,7 +16,7 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 
 RUN apt-get update \
         && apt-get install -y --no-install-recommends locales apt-transport-https nano git ssmtp \
-        && apt-get install -y libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libxpm-dev libvpx-dev libmcrypt-dev libmemcached-dev \
+        && apt-get install -y libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libvpx-dev libmcrypt-dev libmemcached-dev \
         && apt-get upgrade -y \
         && echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen \
         && locale-gen \
