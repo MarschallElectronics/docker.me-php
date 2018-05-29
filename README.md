@@ -36,7 +36,7 @@ services:
                 /bar "/var/www/html/bar/";
                 /bsp "/var/www/html/bsp/";
 ```
-* `container_name` - Eindeutiger Name des Containers **(Einmaliger Name)**
+* `container_name` - Eindeutiger Name des Containers **(Einzigartiger Name)**
 * `image` - Name des Image das genutzt werden soll
 * `volumes` - Eine Liste von "Volumes" die genutzt werden
 * `ports` - Externer Port / Container Port
@@ -95,6 +95,13 @@ Zum Beenden dient der Befehl:
 ```
 systemctl stop docker-me-team.service
 ```
+## SSL auf Container durchschleifen
+
+In der default vhost.conf wird automatisch "HTTPS=on" gesetzt wenn der RequestHeader "X-Forwarded-Proto" auf "https" gesetzt ist.<br>
+Um diesen Header übergeben zu können muss im Hostsystem die vhost.conf für das jeweilige hosting angepasst werden.<br> 
+`RequestHeader set X-Forwarded-Proto "https"` muss in den SSL Teil der config eingetragen werden.
+
+IMPORTANT: Dieser Header muss für JOOMLA Seiten gesetzt werden damit "HTTPS=on" gesetzt wird, da Joomla sonst keine Inhalte via. HTTPS:// bereitstellt!
 
 ## Authoren
 
