@@ -107,3 +107,6 @@ IMPORTANT: Dieser Header muss für JOOMLA Seiten gesetzt werden damit "HTTPS=on"
 
 * **Tobias Bergkofer** - [Nightscore](https://github.com/Nightscore)
 * **Benedict Reuthlinger** - [BeneReuthlinger](https://github.com/BeneReuthlinger)
+
+
+TEST
