@@ -27,8 +27,13 @@ RUN apt-get update \
     && a2enmod rewrite \
     && a2enmod remoteip
 
+
+RUN pecl install apcu \
+    && docker-php-ext-enable apcu
+
 ADD ./config/ssmtp.conf /etc/ssmtp/ssmtp.conf
 ADD ./config/ssmtp-php.ini /usr/local/etc/php/conf.d/
+ADD ./config/default-php.ini /usr/local/etc/php/conf.d/
 ADD ./config/remoteip.conf /etc/apache2/conf-available/
 ADD ./config/vhost.conf /etc/apache2/sites-available/
 

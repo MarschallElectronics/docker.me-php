@@ -23,12 +23,16 @@ RUN apt-get update \
     && locale-gen \
     && apt-get update \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ --with-vpx-dir=/usr/lib/x86_64-linux-gnu/ \
-    && docker-php-ext-install gd pdo pdo_mysql mysqli iconv mbstring \
+    && docker-php-ext-install gd pdo pdo_mysql mysqli iconv mbstring  \
     && a2enmod rewrite \
     && a2enmod remoteip
 
+RUN pecl install apcu \
+    && docker-php-ext-enable apcu
+
 ADD ./config/ssmtp.conf /etc/ssmtp/ssmtp.conf
 ADD ./config/ssmtp-php.ini /usr/local/etc/php/conf.d/
+ADD ./config/default-php.ini /usr/local/etc/php/conf.d/
 ADD ./config/remoteip.conf /etc/apache2/conf-available/
 ADD ./config/vhost.conf /etc/apache2/sites-available/
 
