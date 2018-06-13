@@ -27,8 +27,8 @@ RUN apt-get update \
 	&& a2enmod rewrite \
 	&& a2enmod remoteip
 
-RUN pecl install apcu \
-	&& docker-php-ext-enable apcu
+#RUN pecl install apcu \
+#	&& docker-php-ext-enable apcu
 
 RUN pear install DB \
 	&& pear install DB_Dataobject
