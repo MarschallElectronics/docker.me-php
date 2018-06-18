@@ -1,6 +1,10 @@
 #!/bin/bash
 
 ##################################################################################################################
+# Globale Host IP
+export DOCKER_HOST_IP="$(/sbin/ip route|awk '/default/ { print $3 }')"
+
+##################################################################################################################
 # Unable to get Full Qualified Servername Workaround
 echo "ServerName "$SERVER_NAME >> /etc/apache2/apache2.conf
 
@@ -11,6 +15,10 @@ sed -i 's/'hostname=.*'/'hostname=$SERVER_NAME'/g' /etc/ssmtp/ssmtp.conf
 
 ##################################################################################################################
 # RemoteIp Config
+if [ -z "$REMOTE_IP_PROXY" ]
+then
+       export REMOTE_IP_PROXY=$DOCKER_HOST_IP
+fi
 sed -i 's/'RemoteIPTrustedProxy.*'/'RemoteIPTrustedProxy\ $REMOTE_IP_PROXY'/g' /etc/apache2/conf-available/remoteip.conf
 
 ##################################################################################################################
