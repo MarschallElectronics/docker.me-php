@@ -50,4 +50,4 @@ WORKDIR /var/www/html
 
 EXPOSE 80
 
-CMD ["start-container.sh"]
+CMD ["/usr/local/bin/start-container.sh"]
