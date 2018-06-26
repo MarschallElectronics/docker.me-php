@@ -16,7 +16,7 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
 
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends locales apt-transport-https nano git net-tools iproute2 mailutils \
+	&& apt-get install -y --no-install-recommends locales apt-transport-https nano git net-tools iproute2 mailutils gnupg \
 	&& apt-get install -y libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libvpx-dev libmcrypt-dev libmemcached-dev \
 	&& echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt \
     && echo "postfix postfix/mailname string docker_web1.garmisch.net" >> preseed.txt \
