@@ -4,7 +4,7 @@ FROM php:5.6-apache
 ENV SERVER_NAME me-base.garmisch.net
 
 # SSMTP ENV
-ENV SSMTP_MAILHUB mx2.garmisch.net:25
+ENV RELAYHOST mx2.garmisch.net
 
 # Apache ENV
 ENV APACHE_DOC_ROOT /var/www/html
@@ -18,6 +18,11 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends locales apt-transport-https nano git ssmtp net-tools iproute2 mailutils \
 	&& apt-get install -y libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libvpx-dev libmcrypt-dev libmemcached-dev \
+	&& echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt \
+    && echo "postfix postfix/mailname string docker_web1.garmisch.net" >> preseed.txt \
+                                       && debconf-set-selections preseed.txt \
+                                       && DEBIAN_FRONTEND=noninteractive \
+                                       && apt-get install -y postfix \
 	&& apt-get upgrade -y \
 	&& echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen \
 	&& locale-gen \
@@ -33,8 +38,7 @@ RUN pecl install apcu-4.0.11 \
 RUN pear install DB \
 	&& pear install DB_Dataobject
 
-ADD ./config/ssmtp.conf /etc/ssmtp/ssmtp.conf
-ADD ./config/ssmtp-php.ini /usr/local/etc/php/conf.d/
+ADD ./config/postfix.ini /usr/local/etc/php/conf.d/
 ADD ./config/default-php.ini /usr/local/etc/php/conf.d/
 ADD ./config/remoteip.conf /etc/apache2/conf-available/
 ADD ./config/vhost.conf /etc/apache2/sites-available/

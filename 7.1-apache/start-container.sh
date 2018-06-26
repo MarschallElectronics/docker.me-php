@@ -3,15 +3,19 @@
 ##################################################################################################################
 # Globale Host IP
 export DOCKER_HOST_IP="$(/sbin/ip route|awk '/default/ { print $3 }')"
+export MYHOSTNAME=$(hostname)
 
 ##################################################################################################################
 # Unable to get Full Qualified Servername Workaround
 echo "ServerName "$SERVER_NAME >> /etc/apache2/apache2.conf
 
 ##################################################################################################################
-# SSMTP Config
-sed -i 's/'mailhub=.*'/'mailhub=$SSMTP_MAILHUB'/g' /etc/ssmtp/ssmtp.conf
-sed -i 's/'hostname=.*'/'hostname=$SERVER_NAME'/g' /etc/ssmtp/ssmtp.conf
+# POSTFIx Config
+echo $MYHOSTNAME > /etc/mailname
+sed -i 's/'relayhost\ =.*'/'relayhost=$RELAYHOST'/g' /etc/postfix/main.cf
+sed -i 's/'myhostname\ =.*'/'myhostname=$MYHOSTNAME'/g' /etc/postfix/main.cf
+
+/etc/init.d/postfix start
 
 ##################################################################################################################
 # RemoteIp Config
