@@ -21,7 +21,6 @@ sed -i 's/'myhostname\ =.*'/'myhostname=$MYHOSTNAME'/g' /etc/postfix/main.cf
 # RemoteIp Config
 if [ -z "$REMOTE_IP_PROXY" ]
 then
-    echo "test"
     export REMOTE_IP_PROXY=$DOCKER_HOST_IP
 fi
 sed -i 's/'RemoteIPTrustedProxy.*'/'RemoteIPTrustedProxy\ $REMOTE_IP_PROXY'/g' /etc/apache2/conf-available/remoteip.conf
