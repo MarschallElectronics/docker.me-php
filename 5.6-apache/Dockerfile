@@ -36,7 +36,7 @@ RUN apt-get update \
 	&& locale-gen \
 	&& apt-get update \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
-	&& docker-php-ext-install mysql gd pdo pdo_mysql mysqli iconv mbstring \
+	&& docker-php-ext-install mysql gd pdo pdo_mysql mysqli \
 	&& a2enmod rewrite \
 	&& a2enmod remoteip \
 	&& pecl install apcu-4.0.11 \

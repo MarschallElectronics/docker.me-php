@@ -42,8 +42,6 @@ IFS=';' read -ra aliases <<< "$ALIASES"
 IFS=$SaveIFS
 
 for alias in "${aliases[@]}"; do
-#    echo "$alias"
-    sed -i "/#ALIASES/a Alias $alias"  /etc/apache2/sites-available/vhost.conf
+	sed -i "/#ALIASES/a Alias $alias"  /etc/apache2/sites-available/vhost.conf
 done
 
-apache2 -D FOREGROUND
