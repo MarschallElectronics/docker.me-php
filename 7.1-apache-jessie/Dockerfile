@@ -1,4 +1,4 @@
-FROM php:7.2-apache-stretch
+FROM php:7.1-apache-jessie
 
 # Default Server ENV
 ENV SERVER_NAME me-base.garmisch.net

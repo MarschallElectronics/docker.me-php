@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:5.6-apache-stretch
 
 # Default Server ENV
 ENV SERVER_NAME me-base.garmisch.net
