@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "###############################################"
+echo "ME: install-sqlsrv"
+echo "###############################################"
+
 export ACCEPT_EULA=Y
 
 apt-get update \
