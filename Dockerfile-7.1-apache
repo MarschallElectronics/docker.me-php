@@ -20,7 +20,7 @@ RUN	 dos2unix /usr/local/bin/install-global.sh \
   && chmod +x /usr/local/bin/install-7.1-features.sh \
   && /usr/local/bin/install-7.1-features.sh
 
-CMD ["apache2 -D FOREGROUND"]
+CMD ["apache2", "-D FOREGROUND"]
 
 WORKDIR /var/www/html
 EXPOSE 80
