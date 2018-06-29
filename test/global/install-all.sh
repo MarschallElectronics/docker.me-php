@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "ME: Install and Configure Packages"
+
 apt-get update \
 	&& apt-get install -y --no-install-recommends locales apt-transport-https nano git net-tools iproute2 mailutils gnupg \
 	&& apt-get install -y libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libvpx-dev libmcrypt-dev libmemcached-dev \
@@ -22,4 +24,4 @@ apt-get update \
 	&& pear install DB_Dataobject \
 	&& a2enconf remoteip \
 	&& a2dissite 000-default \
-	&& a2ensite vhost.conf 
+	&& a2ensite vhost.conf

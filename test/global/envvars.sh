@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Default ENVIRONMENT-Variablen setzen"
+echo "ME: Default ENVIRONMENT-Variablen setzen"
 
 # Default Server ENV
 export SERVER_NAME=me-base.garmisch.net

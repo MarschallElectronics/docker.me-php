@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "ME: Configure other things"
+
 ##################################################################################################################
 # Globale Host IP
 export DOCKER_HOST_IP="$(/sbin/ip route|awk '/default/ { print $3 }')"
