@@ -1,0 +1,30 @@
+FROM php:5.6-apache-stretch
+
+# Config-Files
+COPY ./global/config/postfix-php.ini /usr/local/etc/php/conf.d/
+COPY ./global/config/default-php.ini /usr/local/etc/php/conf.d/
+COPY ./global/config/remoteip.conf /etc/apache2/conf-available/
+COPY ./global/config/vhost.conf /etc/apache2/sites-available/
+COPY ./global/envvars.sh /usr/local/bin/envvars.sh
+COPY ./global/install-all.sh /usr/local/bin/install-all.sh
+COPY ./global/configure-all.sh /usr/local/bin/configure-all.sh
+
+# dos2unix konvertieren der line separators CRLF -> LF
+# https://willi.am/blog/2016/08/11/docker-for-windows-dealing-with-windows-line-endings/
+RUN apt-get update && apt-get install -y dos2unix
+
+# RUN IT
+RUN	 dos2unix /usr/local/bin/envvars.sh \
+	&& dos2unix /usr/local/bin/install-all.sh \
+	&& dos2unix /usr/local/bin/configure-all.sh \
+	&& chmod +x /usr/local/bin/envvars.sh \
+	&& chmod +x /usr/local/bin/install-all.sh \
+	&& chmod +x /usr/local/bin/configure-all.sh \
+	&& /usr/local/bin/envvars.sh \
+	&& /usr/local/bin/install-all.sh \
+	&& /usr/local/bin/configure-all.sh
+
+CMD ["apache2 -D FOREGROUND"]
+
+WORKDIR /var/www/html
+EXPOSE 80

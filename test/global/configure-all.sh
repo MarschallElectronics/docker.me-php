@@ -45,3 +45,4 @@ for alias in "${aliases[@]}"; do
 	sed -i "/#ALIASES/a Alias $alias"  /etc/apache2/sites-available/vhost.conf
 done
 
+

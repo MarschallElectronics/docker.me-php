@@ -22,5 +22,4 @@ apt-get update \
 	&& pear install DB_Dataobject \
 	&& a2enconf remoteip \
 	&& a2dissite 000-default \
-	&& a2ensite vhost.conf \
-	&& chmod +x /usr/local/bin/start-container.sh
+	&& a2ensite vhost.conf 
