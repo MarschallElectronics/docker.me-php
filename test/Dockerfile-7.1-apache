@@ -1,4 +1,4 @@
-FROM php:5.6-apache-stretch
+FROM php:7.1-apache-stretch
 
 # Config- und Script-Files
 COPY ./global/config/postfix-php.ini /usr/local/etc/php/conf.d/
@@ -6,7 +6,6 @@ COPY ./global/config/default-php.ini /usr/local/etc/php/conf.d/
 COPY ./global/config/remoteip.conf /etc/apache2/conf-available/
 COPY ./global/config/vhost.conf /etc/apache2/sites-available/
 COPY ./global/install-global.sh /usr/local/bin/install-global.sh
-COPY ./5.6-apache/install-5.6-features.sh /usr/local/bin/install-5.6-features.sh
 
 # dos2unix konvertieren der line separators CRLF -> LF
 # https://willi.am/blog/2016/08/11/docker-for-windows-dealing-with-windows-line-endings/
@@ -16,9 +15,6 @@ RUN apt-get update && apt-get install -y dos2unix
 RUN	 dos2unix /usr/local/bin/install-global.sh \
 	&& chmod +x /usr/local/bin/install-global.sh \
 	&& /usr/local/bin/install-global.sh
-	&& dos2unix /usr/local/bin/install-5.6-features.sh \
-  && chmod +x /usr/local/bin/install-5.6-features.sh \
-  && /usr/local/bin/install-5.6-features.sh
 
 CMD ["apache2 -D FOREGROUND"]
 
