@@ -12,4 +12,6 @@ if [ "X" != "X${TAG}" ]
 then
 	docker build -t marschallelectronics/me_base-php:${TAG} -f ${DOCKERFILE} .
 	docker push marschallelectronics/me_base-php:${TAG}
+else
+	echo "No TAG available!"
 fi
