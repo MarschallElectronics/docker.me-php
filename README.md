@@ -28,8 +28,8 @@ services:
             - '8020:80'
         environment:
             SERVER_NAME: me-team.net
-            REMOTE_IP_PROXY: 0.0.0.0
-            SSMTP_MAILHUB: mx2.garmisch.net:25
+            REMOTE_IP_PROXY: 172.18.0.1
+            RELAYHOST: mx2.garmisch.net:25
             DOCUMENT_ROOT: /var/www/html
             ALIASES:
                 /foo "/var/www/html/foo/";
