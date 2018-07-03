@@ -1,19 +1,20 @@
 FROM php:7.2-apache-stretch
 
-# Default Server ENV
-ENV SERVER_NAME me-base.garmisch.net
-
-# SSMTP ENV
-ENV RELAYHOST mx2.garmisch.net
-
-# Apache ENV
-ENV APACHE_DOC_ROOT /var/www/html
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_RUN_DIR /var/run/apache2
-ENV APACHE_LOG_DIR /var/log/apache2
-ENV APACHE_LOCK_DIR /var/lock/apache2
-ENV APACHE_PID_FILE /var/run/apache2.pid
+# ENV
+ENV APACHE_DOC_ROOT="/var/www/html"
+ENV APACHE_RUN_USER="www-data"
+ENV APACHE_RUN_GROUP="www-data"
+ENV APACHE_RUN_DIR="/var/run/apache2"
+ENV APACHE_LOG_DIR="/var/log/apache2"
+ENV APACHE_LOCK_DIR="/var/lock/apache2"
+ENV APACHE_PID_FILE="/var/run/apache2.pid"
+ENV SERVER_NAME="me-base.garmisch.net"
+ENV MYHOSTNAME="me-base.garmisch.net"
+ENV DOCUMENT_ROOT="/var/www/html"
+ENV DOCKER_HOST_IP="127.0.0.1"
+ENV RELAYHOST="mx2.garmisch.net"
+ENV REMOTE_IP_PROXY=""
+ENV ALIASES=""
 
 # Config-Files
 COPY ./config/postfix.ini /usr/local/etc/php/conf.d/
