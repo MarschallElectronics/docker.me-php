@@ -8,7 +8,7 @@ then
 	TAG=$(echo ${DOCKERFILE} | grep "^Dockerfile-" | cut -c 12-)
 fi
 
-if [ -n ${TAG} ]
+if [ "X" != "X${TAG}" ]
 then
 	echo "docker build -t marschallelectronics/me_base-php:${TAG} -f ${DOCKERFILE} ."
 	echo "docker push marschallelectronics/me_base-php:${TAG}"
