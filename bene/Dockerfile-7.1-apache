@@ -1,42 +1,23 @@
 FROM php:7.1-apache-stretch
 
-# ENV
-ENV APACHE_DOC_ROOT="/var/www/html"
-ENV APACHE_RUN_USER="www-data"
-ENV APACHE_RUN_GROUP="www-data"
-ENV APACHE_RUN_DIR="/var/run/apache2"
-ENV APACHE_LOG_DIR="/var/log/apache2"
-ENV APACHE_LOCK_DIR="/var/lock/apache2"
-ENV APACHE_PID_FILE="/var/run/apache2.pid"
-ENV SERVER_NAME="me-base.garmisch.net"
-ENV MYHOSTNAME="me-base.garmisch.net"
-ENV DOCUMENT_ROOT="/var/www/html"
-ENV DOCKER_HOST_IP="127.0.0.1"
-ENV RELAYHOST="mx2.garmisch.net"
-ENV REMOTE_IP_PROXY=""
-ENV ALIASES=""
-
 # Config- und Script-Files
-COPY ./global/config/postfix-php.ini /usr/local/etc/php/conf.d/
 COPY ./global/config/default-php.ini /usr/local/etc/php/conf.d/
-COPY ./global/config/remoteip.conf /etc/apache2/conf-available/
+COPY ./global/config/postfix-php.ini /usr/local/etc/php/conf.d/
 COPY ./global/config/vhost.conf /etc/apache2/sites-available/
-COPY ./global/install-global.sh /usr/local/bin/install-global.sh
-COPY ./7.1-apache/install-7.1-features.sh /usr/local/bin/install-7.1-features.sh
+COPY ./global/docker-global.sh /usr/local/bin/docker-me-global.sh
+COPY ./global/docker-global.sh /usr/local/bin/docker-me-entrypoint.sh
+COPY ./7.1-apache/docker-me-7.1-features.sh /usr/local/bin/docker-me-7.1-features.sh
 
-# dos2unix konvertieren der line separators CRLF -> LF
-# https://willi.am/blog/2016/08/11/docker-for-windows-dealing-with-windows-line-endings/
-RUN apt-get update && apt-get install -y dos2unix
+# ausführbar machen
+RUN	chmod +x /usr/local/bin/docker-me-global.sh
+RUN chmod +x /usr/local/bin/docker-me-7.1-features.sh
+RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
 
-# RUN IT
-RUN	 dos2unix /usr/local/bin/install-global.sh \
-	&& chmod +x /usr/local/bin/install-global.sh \
-	&& /usr/local/bin/install-global.sh \
-	&& dos2unix /usr/local/bin/install-7.1-features.sh \
-  && chmod +x /usr/local/bin/install-7.1-features.sh \
-  && /usr/local/bin/install-7.1-features.sh
+# ausführen
+RUN docker-me-global.sh
+RUN docker-me-7.1-features.sh
 
-CMD ["apache2", "-D FOREGROUND"]
+ENTRYPOINT ["docker-me-entrypoint.sh"]
+CMD ["apache2-foreground"]
 
-WORKDIR /var/www/html
-EXPOSE 80
+
