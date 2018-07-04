@@ -24,7 +24,7 @@ COPY ./start-container.sh /usr/local/bin/start-container.sh
 
 # RUN IT
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends locales apt-transport-https nano git net-tools iproute2 mailutils gnupg \
+	&& apt-get install -y locales apt-transport-https nano git net-tools iproute2 mailutils gnupg libxml2-dev \
 	&& apt-get install -y libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libvpx-dev libmcrypt-dev libmemcached-dev \
 	&& echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt \
 	&& echo "postfix postfix/mailname string docker_web1.garmisch.net" >> preseed.txt \
@@ -36,7 +36,7 @@ RUN apt-get update \
 	&& locale-gen \
 	&& apt-get update \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
-	&& docker-php-ext-install mysql gd pdo pdo_mysql mysqli \
+	&& docker-php-ext-install mysql gd pdo pdo_mysql mysqli soap \
 	&& a2enmod rewrite \
 	&& a2enmod remoteip \
 	&& pecl install apcu-4.0.11 \
