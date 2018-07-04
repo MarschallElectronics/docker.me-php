@@ -1,0 +1,9 @@
+FROM marschallelectronics/me-php:7.1-apache-jessie
+
+# Config- und Script-Files
+COPY ./7.1-apache-sqlsrv/docker-me-sqlsrv.sh /usr/local/bin/docker-me-sqlsrv.sh
+
+# RUN IT
+RUN	chmod +x /usr/local/bin/docker-me-sqlsrv.sh \
+	&& /usr/local/bin/docker-me-sqlsrv.sh
+
