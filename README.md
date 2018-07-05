@@ -1,6 +1,6 @@
-# ME_Base-php Images
+# me-php Images
 
-Die ME_Base-php Images geben eine schnelle und einfache Möglichkeit einen Webserver auf Docker-Basis aufzusetzen. <br>
+Die me-php Images geben eine schnelle und einfache Möglichkeit einen Webserver auf Docker-Basis aufzusetzen. <br>
 **Nachfolgend wird als _hosting name_ `me-team.net` genutzt!**
 
 ## Getting Started
@@ -9,9 +9,9 @@ Man erstellt eine docker-compose-www.yml unter /srv/www/vhosts/`me-team.net`/doc
 Diese wird wie im nächsten punkt erläutert.
 
 ### Versionen:
-Derzeit gibt es 2 Versionen des ME_Base-php Images diese werden mit dem Tag unterschieden, welches nach dem ":" steht. Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Images nicht.
-* `marschallelectronics/me_base-php:5.6-apache` - PHP Version 5.6
-* `marschallelectronics/me_base-php:7.1-apache` - PHP Version 7.1
+Derzeit gibt es 2 Versionen des me-php Images diese werden mit dem Tag unterschieden, welches nach dem ":" steht. Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Images nicht.
+* `marschallelectronics/me-php:5.6-apache` - PHP Version 5.6
+* `marschallelectronics/me-php:7.1-apache` - PHP Version 7.1
 
 ### docker-compose-www.yml
 
@@ -21,7 +21,7 @@ version: '3'
 services:
     webserver_me_team:
         container_name: webserver_me_team
-        image: marschallelectronics/me_base-php:7.1-apache
+        image: marschallelectronics/me-php:7.1-apache
         volumes:
             - ../public/www/:/var/www/html/
         ports:
@@ -29,7 +29,7 @@ services:
         environment:
             SERVER_NAME: me-team.net
             REMOTE_IP_PROXY: 172.18.0.1
-            RELAYHOST: mx2.garmisch.net:25
+            RELAYHOST: mx2.garmisch.net
             DOCUMENT_ROOT: /var/www/html
             ALIASES:
                 /foo "/var/www/html/foo/";
