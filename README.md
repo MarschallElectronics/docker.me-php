@@ -51,7 +51,7 @@ Für diese Images werden folgende Envorinment variablen benötigt. <br>
 
 * `SERVER_NAME` - Fully qualified domain name
 * `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy _(Default: Host_IP)_
-* `SSMTP_MAILHUB` - Domain des Relay Server
+* `RELAYHOST` - Domain des Relay Server
 * `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
 * `ALIASES` - _(Optional) Eine liste von Aliasen für den Apache mit ";" getrennt._
 
