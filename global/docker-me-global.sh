@@ -44,6 +44,12 @@ php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" \
     && php /tmp/composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer \
     && rm /tmp/composer-setup.php
 
+#echo "# NodeJS"
+# ...
+
+#echo "# Yarn Paketmanger"
+# ...
+
 echo "# Apache Vhost"
 a2dissite 000-default \
 	&& a2ensite vhost.conf
