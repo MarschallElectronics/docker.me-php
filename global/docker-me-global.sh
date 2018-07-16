@@ -35,8 +35,9 @@ docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --wit
 	&& pear install DB \
 	&& pear install DB_Dataobject
 
-echo "# Apache Module"
+echo "# Apache Modules"
 a2enmod rewrite \
+    && a2enmod ssl \
     && a2enmod remoteip \
     && echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf \
     && echo "RemoteIPTrustedProxy 127.0.0.1" >> /etc/apache2/conf-available/remoteip.conf \
