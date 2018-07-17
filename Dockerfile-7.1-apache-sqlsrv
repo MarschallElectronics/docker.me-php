@@ -1,4 +1,5 @@
 FROM marschallelectronics/me-php:7.1-apache-jessie
+MAINTAINER Bene Reuthlinger <br@garmisch.net>
 
 # Config- und Script-Files
 COPY ./7.1-apache-sqlsrv/docker-me-sqlsrv.sh /usr/local/bin/docker-me-sqlsrv.sh
