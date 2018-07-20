@@ -39,6 +39,7 @@ echo "# Apache Modules"
 a2enmod rewrite \
     && a2enmod ssl \
     && a2enmod remoteip \
+    && a2enmod headers \
     && echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf \
     && echo "RemoteIPTrustedProxy 127.0.0.1" >> /etc/apache2/conf-available/remoteip.conf \
 	&& a2enconf remoteip
