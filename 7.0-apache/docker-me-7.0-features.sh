@@ -3,7 +3,7 @@
 set -e
 
 echo "###############################################"
-echo "ME: install-7.1-features"
+echo "ME: install-7.0-features"
 echo "###############################################"
 
 # PHP-Ext: APCU, iconv, mbstring, Mcrypt (Deprecated in 7.2)
