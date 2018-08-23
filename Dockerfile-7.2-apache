@@ -1,6 +1,7 @@
 FROM php:7.2-apache-stretch
 MAINTAINER Bene Reuthlinger <br@garmisch.net>
 
+ENV TZ="Europe/Berlin"
 ENV DOCKER_HOST_IP="127.0.0.1"
 ENV MYHOSTNAME="me-php.garmisch.net"
 ENV SERVER_NAME="me-php.garmisch.net"
