@@ -31,7 +31,6 @@ echo "# Language"
 echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen \
 	&& locale-gen
 
-# @todo xdebug funzt nicht unter PHP5
 echo "# PHP-Extensions: GD, Mysql, Mysqli, Soap, Xdebug, ..."
 docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
 	&& docker-php-ext-install gd pdo pdo_mysql mysqli soap pcntl pdo_sqlite zip curl bcmath opcache simplexml xmlrpc xml soap session readline pspell ldap \
