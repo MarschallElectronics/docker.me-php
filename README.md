@@ -9,9 +9,8 @@ Man erstellt eine docker-compose-www.yml unter /srv/www/vhosts/`me-team.net`/doc
 Diese wird wie im nächsten punkt erläutert.
 
 ### Versionen:
-Derzeit gibt es 2 Versionen des me-php Images diese werden mit dem Tag unterschieden, welches nach dem ":" steht. Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Images nicht.
-* `marschallelectronics/me-php:5.6-apache` - PHP Version 5.6
-* `marschallelectronics/me-php:7.1-apache` - PHP Version 7.1
+Versionen des me-php Images werden mit dem Tag unterschieden, welches nach dem ":" steht.<br> 
+Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Images nicht.
 
 ### docker-compose-www.yml
 
@@ -58,7 +57,7 @@ Für diese Images werden folgende Envorinment variablen benötigt. <br>
 ## Startscript für SystemD
 
 Um die Docker-Container dauerhaft laufen zu lassen und das sie sich nach Fehlern neu starten erstellen wir einen SystemD Dienst.
-Hierzu legen wir eine `docker-me-team.service` unter _/etc/systemd/system/multi-user.target.wants/_ an, und passen folgenden text für das Hosting an.
+Hierzu legen wir eine `docker-me-team.service` unter _/lib/systemd/system/_ an, und passen folgenden text für das Hosting an.
 
 ```
 [Unit]
@@ -107,6 +106,3 @@ IMPORTANT: Dieser Header muss für JOOMLA Seiten gesetzt werden damit "HTTPS=on"
 
 * **Tobias Bergkofer** - [Nightscore](https://github.com/Nightscore)
 * **Benedict Reuthlinger** - [BeneReuthlinger](https://github.com/BeneReuthlinger)
-
-
-TEST
