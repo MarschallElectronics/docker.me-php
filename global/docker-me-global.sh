@@ -16,7 +16,7 @@ echo "-------------------------------"
 apt-get install -y locales apt-transport-https nano git net-tools iproute2 mailutils gnupg libxml2-dev mysql-client \
 	libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libvpx-dev libmcrypt-dev libmemcached-dev \
 	libsqlite3-dev libssl-dev libz-dev libz-dev zlib1g-dev libsqlite3-dev zip libxml2-dev \
-	libcurl3-dev libedit-dev libpspell-dev libldap2-dev unixodbc-dev libpq-dev wget
+	libcurl3-dev libedit-dev libpspell-dev libldap2-dev unixodbc-dev libpq-dev wget libc-client-dev libkrb5-dev
 
 echo "# + Bugfix: libldap (https://bugs.php.net/bug.php?id=49876)"
 echo "-------------------------------"
