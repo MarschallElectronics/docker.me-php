@@ -12,6 +12,23 @@ Diese wird wie im nächsten punkt erläutert.
 Versionen des me-php Images werden mit dem Tag unterschieden, welches nach dem ":" steht.<br> 
 Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Images nicht.
 
+### Envorinment Variablen
+
+Envorinment Variablen werden dazu genutzt um das Image für das jeweilige hosting anzupassen.<br>
+_Beispiele unter docker-compose-www.yml_
+
+Für diese Images werden folgende Envorinment variablen benötigt. <br>
+
+* `DOCKER_HOST_IP` - _IP-Adresse des Docker-Containers (Default: 127.0.0.1)_
+* `SERVER_NAME` - Fully qualified domain name  (Default: me-php.garmisch.net)
+* `MYHOSTNAME` - _Alias für SERVER_NAME_
+* `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy _(Default: Host_IP)_
+* `RELAYHOST` - Domain des Relay Server
+* `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
+* `ALIASES` - _Eine Liste von Aliasen für den Apache mit ";" getrennt._
+* `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: yes)_
+* `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
+
 ### docker-compose-www.yml
 
 ```
@@ -40,19 +57,6 @@ services:
 * `volumes` - Eine Liste von "Volumes" die genutzt werden
 * `ports` - Externer Port / Container Port
 * `environment` - Variablen die an den Container gebeben werden **(Mehr im Nächstem Punkt)**
-
-### Envorinment Variablen
-
-Envorinment Variablen werden dazu genutzt um das Image für das jeweilige hosting anzupassen.<br>
-_Beispiele unter docker-compose-www.yml_
-
-Für diese Images werden folgende Envorinment variablen benötigt. <br>
-
-* `SERVER_NAME` - Fully qualified domain name
-* `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy _(Default: Host_IP)_
-* `RELAYHOST` - Domain des Relay Server
-* `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
-* `ALIASES` - _(Optional) Eine liste von Aliasen für den Apache mit ";" getrennt._
 
 ## Startscript für SystemD
 
