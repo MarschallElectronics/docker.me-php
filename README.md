@@ -26,7 +26,7 @@ Für diese Images werden folgende Envorinment variablen benötigt. <br>
 * `RELAYHOST` - Domain des Relay Server
 * `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
 * `ALIASES` - _Eine Liste von Aliasen für den Apache mit ";" getrennt._
-* `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: yes)_
+* `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_
 * `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
 
 ### docker-compose-www.yml
