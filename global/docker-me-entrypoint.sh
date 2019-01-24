@@ -24,6 +24,8 @@ export RELAYHOST
 export DOCUMENT_ROOT
 export ALIASES
 export REMOTE_IP_PROXY
+export START_RSYSLOGD
+export START_POSTFIX
 
 echo "###############################################"
 echo "# Unable to get Full Qualified Servername Workaround"
@@ -52,16 +54,25 @@ then
     fi
 fi
 
-if [[ -x /etc/init.d/postfix ]]
+if [[ -x /etc/init.d/postfix ]] && [[ ${START_POSTFIX} = 'yes' ]]
 then
     /etc/init.d/postfix start
+fi
+
+echo "###############################################"
+echo "# Rsyslogd starten"
+echo "###############################################"
+
+if [[ -x /etc/init.d/rsyslog ]] && [[ ${START_RSYSLOGD} = 'yes' ]]
+then
+    /etc/init.d/rsyslog start
 fi
 
 echo "###############################################"
 echo "# RemoteIp Config"
 echo "###############################################"
 
-if [[ -f /etc/apache2/conf&&vailable/remoteip.conf ]] && [[ -z "$(mount | grep /etc/apache2/conf&&vailable/remoteip.conf)" ]]
+if [[ -f /etc/apache2/conf-available/remoteip.conf ]] && [[ -z "$(mount | grep /etc/apache2/conf-available/remoteip.conf)" ]]
 then
     if [[ -n "${REMOTE_IP_PROXY}" ]]
     then
@@ -78,7 +89,7 @@ echo "###############################################"
 echo "# Apache Conf"
 echo "###############################################"
 
-if [[ -f /etc/apache2/sites&&vailable/vhost.conf ]] && [[ -z "$(mount | grep /etc/apache2/sites&&vailable/vhost.conf)" ]]
+if [[ -f /etc/apache2/sites-available/vhost.conf ]] && [[ -z "$(mount | grep /etc/apache2/sites-available/vhost.conf)" ]]
 then
     echo "###############################################"
     echo "# SERVER_NAME / Document Root"
