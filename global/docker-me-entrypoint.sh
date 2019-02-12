@@ -25,6 +25,7 @@ export DOCUMENT_ROOT
 export ALIASES
 export REMOTE_IP_PROXY
 export START_RSYSLOGD
+export START_CROND
 export START_POSTFIX
 
 echo "###############################################"
@@ -66,6 +67,15 @@ echo "###############################################"
 if [[ -x /etc/init.d/rsyslog ]] && [[ ${START_RSYSLOGD} = 'yes' ]]
 then
     /etc/init.d/rsyslog start
+fi
+
+echo "###############################################"
+echo "# Crond starten"
+echo "###############################################"
+
+if [[ -x /etc/init.d/cron ]] && [[ ${START_CROND} = 'yes' ]]
+then
+    /etc/init.d/cron start
 fi
 
 echo "###############################################"
