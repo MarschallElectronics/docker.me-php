@@ -38,11 +38,10 @@ echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen \
 
 echo "# + install PHP-Extensions: GD, Mysql, Mysqli, Soap, Xdebug, ..."
 echo "-------------------------------"
-apt-get -y install libmagickwand-dev --no-install-recommends \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
+docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
 	&& docker-php-ext-install gd pdo pdo_mysql mysqli soap pcntl pdo_sqlite zip curl bcmath opcache simplexml xmlrpc xml soap session readline pspell ldap \
-	&& pecl install xdebug imagick \
-    && docker-php-ext-enable xdebug gd pdo_mysql pcntl pdo_sqlite zip curl bcmath opcache simplexml xmlrpc xml soap session readline pspell ldap imagick \
+	&& pecl install xdebug \
+    && docker-php-ext-enable xdebug gd pdo_mysql pcntl pdo_sqlite zip curl bcmath opcache simplexml xmlrpc xml soap session readline pspell ldap \
 	&& pear install DB \
 	&& pear install DB_Dataobject
 
