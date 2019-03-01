@@ -14,8 +14,7 @@ ENV START_CROND="no"
 ENV START_POSTFIX="yes"
 
 # Config- und Script-Files
-COPY ./global/config/default-php.ini /usr/local/etc/php/conf.d/
-COPY ./global/config/postfix-php.ini /usr/local/etc/php/conf.d/
+COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/
 COPY ./global/config/vhost.conf /etc/apache2/sites-available/
 COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
 COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
