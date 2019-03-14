@@ -107,6 +107,11 @@ Um diesen Header übergeben zu können muss im Hostsystem die vhost.conf für da
 Im Docker-Container wird in Apache-Config mittels `SetEnvIf X-Forwarded-Proto https HTTPS=on` der Header HTTPS auf on gesetzt.<br /> 
 IMPORTANT: HTTPS=on wirkt nicht auf die .htaccess! D.h. eine Weiterleitung auf https muss über X-Forwarded-Proto gemacht werden: RewriteCond %{HTTP:X-Forwarded-Proto} !=https [NC]
 
+## Repositories
+
+* Github-Repository: https://github.com/MarschallElectronics/docker.me-php
+* Lokal-Repository: https://git.garmisch.net/docker.me-php.git 
+
 ## Autoren
 
 * **Tobias Bergkofer** - [Nightscore](https://github.com/Nightscore)
