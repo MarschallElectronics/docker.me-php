@@ -5,7 +5,7 @@ Die me-php Images geben eine schnelle und einfache Möglichkeit einen Webserver 
 
 ## Getting Started
 
-Man erstellt eine docker-compose-www.yml unter /srv/www/vhosts/`me-team.net`/docker/docker-compose-www.yml <br>
+Man erstellt eine docker-compose.yml unter /srv/www/vhosts/`me-team.net`/docker/docker-compose.yml <br>
 Diese wird wie im nächsten punkt erläutert.
 
 ### Versionen:
@@ -30,7 +30,7 @@ Für diese Images werden folgende Envorinment variablen benötigt. <br>
 * `START_CROND` - _Soll der Cron-Daemon gestartet werden (Default: no)_
 * `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
 
-### docker-compose-www.yml
+### docker-compose.yml
 
 ```
 version: '3'
@@ -72,8 +72,8 @@ After=network.target docker.service
 [Service]
 Type=simple
 WorkingDirectory=/srv/www/vhosts/me-team.net/docker
-ExecStart=/usr/local/bin/docker-compose -f /srv/www/vhosts/me-team.net/docker/docker-compose-www.yml up
-ExecStop=/usr/local/bin/docker-compose -f /srv/www/vhosts/me-team.net/docker/docker-compose-www.yml down
+ExecStart=/usr/local/bin/docker-compose -f /srv/www/vhosts/me-team.net/docker/docker-compose.yml up
+ExecStop=/usr/local/bin/docker-compose -f /srv/www/vhosts/me-team.net/docker/docker-compose.yml down
 RestartSec=10
 Restart=always
 
@@ -82,7 +82,7 @@ WantedBy=multi-user.target
 
 ```
 
-Hat man eine das Startscript angelegt, muss man dieses noch aktivieren. Dies geschieht über den Befehl systemctl mit Root-Rechten.
+Hat man eine das Startscript angelegt, muss man dieses noch aktivieren, damit das OS den Docker-Container automatisch beim Systemstart startet. Dies geschieht über den Befehl systemctl mit Root-Rechten.
 ```
 systemctl enable docker-me-team.service
 ```
@@ -103,11 +103,11 @@ systemctl stop docker-me-team.service
 
 In der default vhost.conf wird automatisch "HTTPS=on" gesetzt wenn der RequestHeader "X-Forwarded-Proto" auf "https" gesetzt ist.<br>
 Um diesen Header übergeben zu können muss im Hostsystem die vhost.conf für das jeweilige hosting angepasst werden.<br> 
-`RequestHeader set X-Forwarded-Proto "https"` muss in den SSL Teil der config eingetragen werden.
+`RequestHeader set X-Forwarded-Proto "https"` muss in den SSL Teil der config eingetragen werden.<br>
+Im Docker-Container wird in Apache-Config mittels `SetEnvIf X-Forwarded-Proto https HTTPS=on` der Header HTTPS auf on gesetzt.<br /> 
+IMPORTANT: HTTPS=on wirkt nicht auf die .htaccess! D.h. eine Weiterleitung auf https muss über X-Forwarded-Proto gemacht werden: RewriteCond %{HTTP:X-Forwarded-Proto} !=https [NC]
 
-IMPORTANT: Dieser Header muss für JOOMLA Seiten gesetzt werden damit "HTTPS=on" gesetzt wird, da Joomla sonst keine Inhalte via. HTTPS:// bereitstellt!
-
-## Authoren
+## Autoren
 
 * **Tobias Bergkofer** - [Nightscore](https://github.com/Nightscore)
 * **Benedict Reuthlinger** - [BeneReuthlinger](https://github.com/BeneReuthlinger)
