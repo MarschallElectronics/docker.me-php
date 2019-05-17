@@ -1,0 +1,34 @@
+FROM php:7.3-apache-stretch
+MAINTAINER Bene Reuthlinger <br@garmisch.net>
+
+ENV TZ="Europe/Berlin"
+ENV DOCKER_HOST_IP="127.0.0.1"
+ENV MYHOSTNAME="me-php.garmisch.net"
+ENV SERVER_NAME="me-php.garmisch.net"
+ENV RELAYHOST=""
+ENV DOCUMENT_ROOT=""
+ENV ALIASES=""
+ENV REMOTE_IP_PROXY=""
+ENV START_RSYSLOGD="no"
+ENV START_CROND="no"
+ENV START_POSTFIX="yes"
+
+# Config- und Script-Files
+COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/
+COPY ./global/config/vhost.conf /etc/apache2/sites-available/
+COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
+COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
+COPY ./7.3-apache/docker-me-7.3-features.sh /usr/local/bin/docker-me-7.3-features.sh
+
+# ausführbar machen
+RUN	chmod +x /usr/local/bin/docker-me-global.sh
+RUN chmod +x /usr/local/bin/docker-me-7.3-features.sh
+RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
+
+# ausführen
+RUN docker-me-global.sh
+RUN docker-me-7.3-features.sh
+
+ENTRYPOINT ["docker-me-entrypoint.sh"]
+CMD ["apache2-foreground"]
+
