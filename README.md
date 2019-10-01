@@ -21,11 +21,12 @@ Für diese Images werden folgende Envorinment variablen benötigt. <br>
 
 * `DOCKER_HOST_IP` - _IP-Adresse des Docker-Containers (Default: 127.0.0.1)_
 * `SERVER_NAME` - Fully qualified domain name  (Default: me-php.garmisch.net)
-* `MYHOSTNAME` - _Alias für SERVER_NAME_
-* `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy _(Default: Host_IP)_
+* `MYHOSTNAME` - Alias für SERVER_NAME für Postfix
+* `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy (Default: Host_IP)
 * `RELAYHOST` - Domain des Relay Server
+* `POSTFIX_MYHOSTNAME` - Myhostname für Postfix
 * `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
-* `ALIASES` - _Eine Liste von Aliasen für den Apache mit ";" getrennt._
+* `ALIASES` - Eine Liste von Aliasen für den Apache mit ";" getrennt.
 * `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_
 * `START_CROND` - _Soll der Cron-Daemon gestartet werden (Default: no)_
 * `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
