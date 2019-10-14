@@ -12,12 +12,25 @@ Diese wird wie im nächsten punkt erläutert.
 Versionen des me-php Images werden mit dem Tag unterschieden, welches nach dem ":" steht.<br> 
 Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Images nicht.
 
+### Apache-Module:
+core_module, so_module, watchdog_module, http_module, log_config_module, logio_module, version_module, unixd_module, 
+access_compat_module, alias_module, auth_basic_module, authn_core_module, authn_file_module, authz_core_module, 
+authz_host_module, authz_user_module, autoindex_module, deflate_module, dir_module, env_module, filter_module, 
+headers_module, mime_module, mpm_prefork_module, negotiation_module, php7_module, remoteip_module, reqtimeout_module, 
+rewrite_module, setenvif_module, socache_shmcb_module, ssl_module, status_module
+
+### PHP-Extensions:
+[PHP Modules] : apcu bcmath Core ctype curl date dom exif fileinfo filter ftp gd hash iconv json ldap libxml mbstring mcrypt mysqli mysqlnd OAuth openssl pcntl pcre PDO pdo_mysql pdo_sqlite pdo_sqlsrv Phar posix pspell readline Reflection session SimpleXML soap SPL sqlite3 sqlsrv standard tokenizer xdebug xml xmlreader xmlrpc xmlwriter Zend OPcache zip zlib<br/>
+[Zend Modules] : Xdebug Zend OPcache
+
+# Apps
+nano, git, composer, yarn, nodejs, npm 
+
 ### Envorinment Variablen
 
 Envorinment Variablen werden dazu genutzt um das Image für das jeweilige hosting anzupassen.<br>
-_Beispiele unter docker-compose-www.yml_
 
-Für diese Images werden folgende Envorinment variablen benötigt. <br>
+Für diese Images gibt es folgende Envorinment-Variablen: <br>
 
 * `DOCKER_HOST_IP` - _IP-Adresse des Docker-Containers (Default: 127.0.0.1)_
 * `SERVER_NAME` - Fully qualified domain name  (Default: me-php.garmisch.net)
