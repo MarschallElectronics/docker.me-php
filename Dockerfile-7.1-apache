@@ -13,6 +13,7 @@ ENV REMOTE_IP_PROXY=""
 ENV START_RSYSLOGD="no"
 ENV START_CROND="no"
 ENV START_POSTFIX="yes"
+ENV DEFAULT_PHPINI="production"
 
 # Config- und Script-Files
 COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/

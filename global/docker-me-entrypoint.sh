@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #
-# [ -n "${SERVER_NAME}" ] -> Variable: String-Länge größer 0
+# [ -n "${SERVER_NAME}" ] -> -n ZEICHENKETTE : Die Länge von ZEICHENKETTE ist ungleich Null
 # [ -f /etc/apache2/apache2.conf ] -> prüfen ob Datei vorhanden
 # [ -z "$(mount | grep /etc/apache2/apache2.conf)" ] -> prüfen ob Datei reingemappt wurde (Sonst kommt Fehler "Device is busy")
 #
 
-set -e
+set -ex
 
 echo "###############################################"
 echo "ME: Configure other things"
@@ -28,6 +28,7 @@ export REMOTE_IP_PROXY
 export START_RSYSLOGD
 export START_CROND
 export START_POSTFIX
+export DEFAULT_PHPINI
 
 echo "###############################################"
 echo "# Unable to get Full Qualified Servername Workaround"
@@ -36,6 +37,17 @@ echo "###############################################"
 if [[ -n "${SERVER_NAME}" ]] && [[ -f /etc/apache2/apache2.conf ]] && [[ -z "$(mount | grep /etc/apache2/apache2.conf)" ]]
 then
     echo "ServerName "${SERVER_NAME} >> /etc/apache2/apache2.conf
+fi
+
+echo "###############################################"
+echo "# Welche PHP.INI (production/development) #"
+echo "###############################################"
+
+if [[ -n "${PHPINI}" ]] && [[ ${DEFAULT_PHPINI} = 'development' ]]
+then
+  cp -p "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"
+else
+  cp -p "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
 fi
 
 echo "###############################################"

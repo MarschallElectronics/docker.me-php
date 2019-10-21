@@ -43,6 +43,7 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_
 * `START_CROND` - _Soll der Cron-Daemon gestartet werden (Default: no)_
 * `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
+* `DEFAULT_PHPINI` - _Welche php.ini soll verwendet werden [production: /usr/local/etc/php/php.ini-production / development: /usr/local/etc/php/php.ini-development] (Default: production)_
 
 ### docker-compose.yml
 
