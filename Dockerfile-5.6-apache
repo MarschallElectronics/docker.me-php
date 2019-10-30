@@ -14,6 +14,11 @@ ENV START_RSYSLOGD="no"
 ENV START_CROND="no"
 ENV START_POSTFIX="yes"
 ENV DEFAULT_PHPINI="production"
+ENV APACHE_TIMEOUT="300"
+ENV SSL_VHOST="no"
+ENV SSL_CERT=""
+ENV SSL_CACERT=""
+ENV SSL_PRIVATEKEY=""
 
 # Config- und Script-Files
 COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/

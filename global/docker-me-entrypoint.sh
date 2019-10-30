@@ -31,6 +31,11 @@ export START_RSYSLOGD
 export START_CROND
 export START_POSTFIX
 export DEFAULT_PHPINI
+export APACHE_TIMEOUT
+export SSL_VHOST
+export SSL_CERT
+export SSL_CACERT
+export SSL_PRIVATEKEY
 
 set +x
 echo "###############################################"
@@ -139,12 +144,22 @@ if [[ -f /etc/apache2/sites-available/vhost.conf ]] && [[ -z "$(mount | grep /et
 
   set +x
   echo "###############################################"
-  echo "# Document Root / ATTENTION: Alternate Command delimiter '#' because the DOCUMENT_ROOT hold a PATH witch Slashes"
+  echo "# Document Root"
   echo "###############################################"
   set -x
 
   if [[ -n "${DOCUMENT_ROOT}" ]]; then
     sed -i "s|DocumentRoot.*|DocumentRoot ${DOCUMENT_ROOT}|g" /etc/apache2/sites-available/vhost.conf
+  fi
+
+  set +x
+  echo "###############################################"
+  echo "# Apache Timeout setzen"
+  echo "###############################################"
+  set -x
+
+  if [[ -n "${APACHE_TIMEOUT}" ]]; then
+    sed -i "s|Timeout.*|Timeout ${APACHE_TIMEOUT}|g" /etc/apache2/sites-available/vhost.conf
   fi
 
   set +x
