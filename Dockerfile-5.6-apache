@@ -21,20 +21,28 @@ ENV SSL_CACERT=""
 ENV SSL_PRIVATEKEY=""
 
 # Config- und Script-Files
-COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/
-COPY ./global/config/vhost.conf /etc/apache2/sites-available/
+COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/1_default-php.ini
+COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
+COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
 COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
 COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
 COPY ./5.6-apache/docker-me-5.6-features.sh /usr/local/bin/docker-me-5.6-features.sh
+COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
 
 # ausführbar machen
 RUN	chmod +x /usr/local/bin/docker-me-global.sh
 RUN chmod +x /usr/local/bin/docker-me-5.6-features.sh
 RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
+RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
 
 # ausführen
-RUN docker-me-global.sh
-RUN docker-me-5.6-features.sh
+RUN /usr/local/bin/docker-me-global.sh
+RUN /usr/local/bin/docker-me-5.6-features.sh
+RUN /usr/local/bin/docker-me-cleanup.sh
 
-ENTRYPOINT ["docker-me-entrypoint.sh"]
+# Ports freigeben
+EXPOSE 80
+EXPOSE 443
+
+ENTRYPOINT ["/usr/local/bin/docker-me-entrypoint.sh"]
 CMD ["apache2-foreground"]

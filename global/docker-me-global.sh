@@ -92,11 +92,3 @@ echo "# + install Apache Vhost"
 echo "-------------------------------"
 a2dissite 000-default \
   && a2ensite vhost.conf
-
-echo "# Cleanup"
-echo "-------------------------------"
-apt-get autoremove -y \
-  && apt-get clean all \
-  && rm -rvf /var/lib/apt/lists/* \
-  && rm -rvf /usr/share/doc /usr/share/man \
-  && rm -rvf /usr/src/php

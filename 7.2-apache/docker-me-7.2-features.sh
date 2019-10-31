@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 echo "###############################################"
 echo "ME: install-7.2-features"

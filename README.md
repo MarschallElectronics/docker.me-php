@@ -32,7 +32,7 @@ Envorinment Variablen werden dazu genutzt um das Image für das jeweilige hostin
 
 Für diese Images gibt es folgende Envorinment-Variablen: <br>
 
-* `DOCKER_HOST_IP` - _IP-Adresse des Docker-Containers (Default: 127.0.0.1)_
+* `DOCKER_HOST_IP` - _IP-Adresse des Docker-Host-Containers (Default: "$(/sbin/ip route | awk '/default/ { print $3 }')")_
 * `SERVER_NAME` - Fully qualified domain name  (Default: me-php.garmisch.net)
 * `MYHOSTNAME` - Alias für SERVER_NAME für Postfix
 * `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy (Default: Host_IP)
@@ -44,6 +44,11 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `START_CROND` - _Soll der Cron-Daemon gestartet werden (Default: no)_
 * `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
 * `DEFAULT_PHPINI` - _Welche php.ini soll verwendet werden [production: /usr/local/etc/php/php.ini-production / development: /usr/local/etc/php/php.ini-development] (Default: production)_
+* `APACHE_TIMEOUT` - _Timeout für Apache2 in Sekunden (default:300)_
+* `SSL_VHOST` - _SSL-Vhost aktivieren? [yes|no] (default: no)_
+* `SSL_CERT` - _Pfad zum SSL-Zertifikat_
+* `SSL_CACERT` - _Pfad zum SSL-CA-Zertifikat_
+* `SSL_PRIVATEKEY` - _Pfad zum SSL-Private-Key_
 
 ### docker-compose.yml
 
