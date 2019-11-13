@@ -32,7 +32,6 @@ export REMOTE_IP_PROXY
 export START_RSYSLOGD
 export START_CROND
 export START_POSTFIX
-export DEFAULT_PHPINI
 export APACHE_TIMEOUT
 export SSL_VHOST
 export SSL_CERT
@@ -51,18 +50,6 @@ set -x
 
 if [[ -n "${SERVER_NAME}" ]] && [[ -f /etc/apache2/apache2.conf ]] && [[ -z "$(mount | grep /etc/apache2/apache2.conf)" ]]; then
   echo "ServerName ${SERVER_NAME}" >>/etc/apache2/apache2.conf
-fi
-
-set +x
-echo "###############################################"
-echo "# Welche PHP.INI (production/development) #"
-echo "###############################################"
-set -x
-
-if [[ -n "${PHPINI}" ]] && [[ ${DEFAULT_PHPINI} == 'development' ]]; then
-  cp -p "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"
-else
-  cp -p "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
 fi
 
 set +x

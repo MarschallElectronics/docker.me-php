@@ -43,7 +43,6 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_
 * `START_CROND` - _Soll der Cron-Daemon gestartet werden (Default: no)_
 * `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
-* `DEFAULT_PHPINI` - _Welche php.ini soll verwendet werden [production: /usr/local/etc/php/php.ini-production / development: /usr/local/etc/php/php.ini-development] (Default: production)_
 * `APACHE_TIMEOUT` - _Timeout für Apache2 in Sekunden (default:300)_
 * `SSL_VHOST` - _SSL-Vhost aktivieren? [yes|no] (default: no)_
 * `SSL_CERT` - _Pfad zum SSL-Zertifikat_
