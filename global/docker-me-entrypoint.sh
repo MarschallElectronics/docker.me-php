@@ -38,7 +38,7 @@ export SSL_CERT
 export SSL_CACERT
 export SSL_PRIVATEKEY
 
-# @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist
+# @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
 DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
 MYHOSTNAME=$(hostname)
 
