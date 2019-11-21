@@ -38,6 +38,7 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy (Default: Host_IP)
 * `RELAYHOST` - Domain des Relay Server
 * `POSTFIX_MYHOSTNAME` - Myhostname für Postfix
+* `POSTFIX_MYDESTINATION` - MYDESTINATION für Postfix (Default: localhost.localdomain, localhost)
 * `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
 * `ALIASES` - Eine Liste von Aliasen für den Apache mit ";" getrennt.
 * `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_
