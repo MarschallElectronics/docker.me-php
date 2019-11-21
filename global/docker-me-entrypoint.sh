@@ -40,7 +40,9 @@ export SSL_PRIVATEKEY
 
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
 DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
-MYHOSTNAME=$(hostname)
+
+# Fullqualified Hostname
+MYHOSTNAME=$(hostname --fqdn)
 
 set +x
 echo "###############################################"
@@ -59,6 +61,11 @@ echo "###############################################"
 set -x
 
 if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)" ]]; then
+
+  # Mydestination nur auf localhost
+  echo "mydestination anpassen..."
+  sed -i "s/mydestination.*=.*/mydestination = localhost.localdomain, localhost/g" /etc/postfix/main.cf
+
   # Wenn Hostname vorhanden dann als Hostname fÃƒÂ¼r Postfix nehmen
   # Problem: manchmal wird nicht der komplette Hostname (FQDN) verwendet. Es werden dann keine Mails versendet :-(.
   if [[ -n "${MYHOSTNAME}" ]]; then
@@ -76,6 +83,7 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
   if [[ -n "${RELAYHOST}" ]]; then
     sed -i "s/relayhost.*=.*/relayhost = ${RELAYHOST}/g" /etc/postfix/main.cf
   fi
+
 fi
 
 if [[ -x /etc/init.d/postfix ]] && [[ ${START_POSTFIX} == 'yes' ]]; then
@@ -174,6 +182,7 @@ if [[ -f /etc/apache2/sites-available/vhost.conf ]] && [[ -z "$(mount | grep /et
   fi
 fi
 
+# @todo SSL_VHOST muss getestet werden
 if [[ ${SSL_VHOST} == 'yes' ]] && [[ -f /etc/apache2/sites-available/sslvhost.conf ]] && [[ -z "$(mount | grep /etc/apache2/sites-available/sslvhost.conf)" ]]; then
   set +x
   echo "###############################################"
