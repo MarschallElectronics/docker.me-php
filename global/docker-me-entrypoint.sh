@@ -25,6 +25,7 @@ export DOCKER_HOST_IP
 export MYHOSTNAME
 export SERVER_NAME
 export POSTFIX_MYHOSTNAME
+export POSTFIX_MYDESTINATION
 export RELAYHOST
 export DOCUMENT_ROOT
 export ALIASES
@@ -64,7 +65,7 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
 
   # Mydestination nur auf localhost
   echo "mydestination anpassen..."
-  sed -i "s/mydestination.*=.*/mydestination = localhost.localdomain, localhost/g" /etc/postfix/main.cf
+  sed -i "s/mydestination.*=.*/mydestination = ${POSTFIX_MYDESTINATION}/g" /etc/postfix/main.cf
 
   # Wenn Hostname vorhanden dann als Hostname fÃƒÂ¼r Postfix nehmen
   # Problem: manchmal wird nicht der komplette Hostname (FQDN) verwendet. Es werden dann keine Mails versendet :-(.
