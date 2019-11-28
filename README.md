@@ -32,23 +32,27 @@ Envorinment Variablen werden dazu genutzt um das Image für das jeweilige hostin
 
 Für diese Images gibt es folgende Envorinment-Variablen: <br>
 
-* `DOCKER_HOST_IP` - _IP-Adresse des Docker-Host-Containers (Default: "$(/sbin/ip route | awk '/default/ { print $3 }')")_
+* `DOCKER_HOST_IP` - _IP-Adresse des Docker-Host-Containers_
 * `SERVER_NAME` - Fully qualified domain name  (Default: me-php.garmisch.net)
 * `MYHOSTNAME` - Alias für SERVER_NAME für Postfix
 * `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy (Default: Host_IP)
 * `RELAYHOST` - Domain des Relay Server
 * `POSTFIX_MYHOSTNAME` - Myhostname für Postfix
 * `POSTFIX_MYDESTINATION` - MYDESTINATION für Postfix (Default: localhost.localdomain, localhost)
+* `POSTFIX_SMTP_USERNAME` - USERNAME für SMTP-Versand (SASL-Auth)
+* `POSTFIX_SMTP_PASSWORD` - PASSWORD für SMTP-Versand (SASL-Auth)
+* `POSTFIX_SMTP_AUTHTLS` - SASL-Auth mit TLS [yes|no] (Default: no)
+* `POSTFIX_SMTP_SENDER` - Absender auf diese Mailadresse ändern (wird im Normalfall nicht benötigt)
 * `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
 * `ALIASES` - Eine Liste von Aliasen für den Apache mit ";" getrennt.
 * `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_
 * `START_CROND` - _Soll der Cron-Daemon gestartet werden (Default: no)_
 * `START_POSTFIX` - _Soll Postfix gestartet werden (Default: yes)_
 * `APACHE_TIMEOUT` - _Timeout für Apache2 in Sekunden (default:300)_
-* `SSL_VHOST` - _SSL-Vhost aktivieren? [yes|no] (default: no)_
-* `SSL_CERT` - _Pfad zum SSL-Zertifikat_
-* `SSL_CACERT` - _Pfad zum SSL-CA-Zertifikat_
-* `SSL_PRIVATEKEY` - _Pfad zum SSL-Private-Key_
+* `SSL_VHOST` - _SSL-Vhost aktivieren? Zertifikats-Dateien müssen über volume reingemappt werden. [yes|no] (default: no)_
+* `SSL_CERT` - _Pfad zum SSL-Zertifikat (bsp: /etc/ssl/sslvw/mycandy.de/certificate.crt)_
+* `SSL_CACERT` - _Pfad zum SSL-CA-Zertifikat (bsp: /etc/ssl/sslvw/mycandy.de/cert.bundle)_
+* `SSL_PRIVATEKEY` - _Pfad zum SSL-Private-Key (bsp: /etc/ssl/sslvw/mycandy.de/private.key)_
 
 ### docker-compose.yml
 

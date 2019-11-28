@@ -26,6 +26,10 @@ export MYHOSTNAME
 export SERVER_NAME
 export POSTFIX_MYHOSTNAME
 export POSTFIX_MYDESTINATION
+export POSTFIX_SMTP_USERNAME
+export POSTFIX_SMTP_PASSWORD
+export POSTFIX_SMTP_AUTHTLS
+export POSTFIX_SMTP_SENDER
 export RELAYHOST
 export DOCUMENT_ROOT
 export ALIASES
@@ -83,6 +87,26 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
   # Relayhost
   if [[ -n "${RELAYHOST}" ]]; then
     sed -i "s/relayhost.*=.*/relayhost = ${RELAYHOST}/g" /etc/postfix/main.cf
+  fi
+
+  # SASL @todo testen: mit gmx gehts noch nicht
+  if [[ -n "${POSTFIX_SMTP_USERNAME}" ]]; then
+    sed -i "s/smtp_sasl_auth_enable.*=.*/smtp_sasl_auth_enable = yes/g" /etc/postfix/main.cf
+
+    if [[ ${POSTFIX_SMTP_AUTHTLS} == 'yes' ]]; then
+      sed -i "s/smtp_tls_security_level.*=.*/smtp_tls_security_level = encrypt/g" /etc/postfix/main.cf
+    fi
+
+    if [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
+      echo "${POSTFIX_SMTP_SENDER} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
+      postmap /etc/postfix/sasl_password
+    fi
+
+    if [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
+      echo "root ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
+      echo "www-data ${POSTFIX_SMTP_SENDER}" >> /etc/postfix/sender_canonical
+      postmap /etc/postfix/sender_canonical
+    fi
   fi
 
 fi
@@ -183,7 +207,7 @@ if [[ -f /etc/apache2/sites-available/vhost.conf ]] && [[ -z "$(mount | grep /et
   fi
 fi
 
-# @todo SSL_VHOST muss getestet werden
+# SSL_VHOST
 if [[ ${SSL_VHOST} == 'yes' ]] && [[ -f /etc/apache2/sites-available/sslvhost.conf ]] && [[ -z "$(mount | grep /etc/apache2/sites-available/sslvhost.conf)" ]]; then
   set +x
   echo "###############################################"
