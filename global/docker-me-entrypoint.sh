@@ -89,7 +89,7 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
     sed -i "s/relayhost.*=.*/relayhost = ${RELAYHOST}/g" /etc/postfix/main.cf
   fi
 
-  # SASL @todo testen: mit gmx gehts noch nicht
+  # SASL @todo testen (mit gmx gehts noch nicht)
   if [[ -n "${POSTFIX_SMTP_USERNAME}" ]]; then
     sed -i "s/smtp_sasl_auth_enable.*=.*/smtp_sasl_auth_enable = yes/g" /etc/postfix/main.cf
 
