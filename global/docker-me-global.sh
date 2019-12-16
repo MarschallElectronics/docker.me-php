@@ -89,6 +89,10 @@ echo "# + install Yarn Paketmanager"
 echo "-------------------------------"
 npm install --global yarn
 
+echo "# + install Symfony"
+echo "-------------------------------"
+wget https://get.symfony.com/cli/installer -O - | bash
+
 echo "# + install Apache Vhost"
 echo "-------------------------------"
 a2dissite 000-default \
