@@ -1,0 +1,53 @@
+FROM php:7.4-apache-buster
+MAINTAINER Bene Reuthlinger <br@garmisch.net>
+
+ENV TZ="Europe/Berlin"
+ENV DOCKER_HOST_IP="127.0.0.1"
+ENV MYHOSTNAME="docker.garmisch.net"
+ENV SERVER_NAME="docker.garmisch.net"
+ENV RELAYHOST=""
+ENV POSTFIX_MYHOSTNAME="docker.garmisch.net"
+ENV POSTFIX_MYDESTINATION="localhost.localdomain, localhost"
+ENV POSTFIX_SMTP_USERNAME=""
+ENV POSTFIX_SMTP_PASSWORD=""
+ENV POSTFIX_SMTP_AUTHTLS=""
+ENV POSTFIX_SMTP_SENDER=""
+ENV DOCUMENT_ROOT=""
+ENV ALIASES=""
+ENV REMOTE_IP_PROXY=""
+ENV START_RSYSLOGD="no"
+ENV START_CROND="no"
+ENV START_POSTFIX="yes"
+ENV APACHE_TIMEOUT="300"
+ENV SSL_VHOST="no"
+ENV SSL_CERT=""
+ENV SSL_CACERT=""
+ENV SSL_PRIVATEKEY=""
+
+# Config- und Script-Files
+COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/1_default-php.ini
+COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
+COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
+COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
+COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
+COPY ./7.4-apache/docker-me-7.4-features.sh /usr/local/bin/docker-me-7.4-features.sh
+COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
+
+# ausführbar machen
+RUN	chmod +x /usr/local/bin/docker-me-global.sh
+RUN chmod +x /usr/local/bin/docker-me-7.4-features.sh
+RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
+RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
+
+# ausführen
+RUN /usr/local/bin/docker-me-global.sh
+RUN /usr/local/bin/docker-me-7.4-features.sh
+RUN /usr/local/bin/docker-me-cleanup.sh
+
+# Ports freigeben
+EXPOSE 80
+EXPOSE 443
+
+ENTRYPOINT ["/usr/local/bin/docker-me-entrypoint.sh"]
+CMD ["apache2-foreground"]
+

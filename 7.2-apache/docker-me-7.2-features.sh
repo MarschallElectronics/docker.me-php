@@ -6,6 +6,10 @@ echo "###############################################"
 echo "ME: install-7.2-features"
 echo "###############################################"
 
+echo "# + install diverse Apps"
+echo "-------------------------------"
+apt-get install -y mysql-client
+
 echo "# install: php apcu, iconv, mbstring"
 echo "-------------------------------"
 pecl install apcu \

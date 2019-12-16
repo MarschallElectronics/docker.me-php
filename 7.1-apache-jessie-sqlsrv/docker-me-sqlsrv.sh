@@ -6,8 +6,13 @@ echo "###############################################"
 echo "ME: install-sqlsrv"
 echo "###############################################"
 
-export ACCEPT_EULA=Y
+echo "# + install diverse Apps"
+echo "-------------------------------"
+apt-get install -y mysql-client
 
+echo "# install: sqlsrv pdo_sqlsrv"
+echo "-------------------------------"
+export ACCEPT_EULA=Y
 apt-get update \
 	&& curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
 	&& curl https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sources.list.d/mssql-release.list \

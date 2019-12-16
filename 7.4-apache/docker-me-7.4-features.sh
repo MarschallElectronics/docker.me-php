@@ -3,18 +3,14 @@
 set -ex
 
 echo "###############################################"
-echo "ME: install-7.1-features"
+echo "ME: install-7.3-features"
 echo "###############################################"
 
-echo "# + install diverse Apps"
-echo "-------------------------------"
-apt-get install -y mysql-client
-
-echo "# install: php apcu, iconv, mbstring, mcrypt (Deprecated ab 7.2)"
+echo "# install: php apcu, iconv, mbstring"
 echo "-------------------------------"
 pecl install apcu \
 	&& docker-php-ext-enable apcu \
-	&& docker-php-ext-install iconv mbstring mcrypt
+	&& docker-php-ext-install iconv mbstring
 
 echo "# install: sqlsrv pdo_sqlsrv"
 echo "-------------------------------"
