@@ -7,3 +7,4 @@ bash BuildAndPush.sh Dockerfile-7.1-apache-jessie
 bash BuildAndPush.sh Dockerfile-7.1-apache-sqlsrv
 bash BuildAndPush.sh Dockerfile-7.2-apache
 bash BuildAndPush.sh Dockerfile-7.3-apache
+bash BuildAndPush.sh Dockerfile-7.4-apache
