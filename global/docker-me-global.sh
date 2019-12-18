@@ -58,6 +58,7 @@ docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --wit
   && docker-php-ext-install pspell && docker-php-ext-enable pspell \
   && docker-php-ext-install ldap && docker-php-ext-enable ldap \
   && docker-php-ext-install exif && docker-php-ext-enable exif \
+  && docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl \
   && pecl install xdebug && docker-php-ext-enable xdebug \
   && pecl install oauth && docker-php-ext-enable oauth \
   && pear install DB \

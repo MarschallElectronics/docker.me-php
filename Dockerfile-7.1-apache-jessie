@@ -30,13 +30,13 @@ COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
 COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
 COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
 COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
-COPY ./7.1-apache/docker-me-7.1-features.sh /usr/local/bin/docker-me-7.1-features.sh
+COPY ./7.1-apache-jessie/docker-me-7.1-features.sh /usr/local/bin/docker-me-7.1-features.sh
 COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
 
 # ausführbar machen
 RUN	chmod +x /usr/local/bin/docker-me-global.sh
-RUN chmod +x /usr/local/bin/docker-me-7.1-features.sh
 RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-me-7.1-features.sh
 RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
 
 # ausführen
