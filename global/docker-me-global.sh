@@ -102,8 +102,10 @@ a2dissite 000-default \
 
 echo "# + config Postfix"
 echo "-------------------------------"
+
 # nur IPv4
 sed -i "s/inet_protocols.*=.*/inet_protocols = ipv4/g" /etc/postfix/main.cf
+
 # SASL vorbereiten
 echo "smtp_sasl_auth_enable = no" >> /etc/postfix/main.cf
 echo "smtp_sasl_security_options = noanonymous" >> /etc/postfix/main.cf
@@ -111,6 +113,12 @@ echo "smtp_tls_security_level = none" >> /etc/postfix/main.cf
 echo "smtp_sasl_password_maps = hash:/etc/postfix/sasl_password" >> /etc/postfix/main.cf
 echo "" > /etc/postfix/sasl_password
 postmap /etc/postfix/sasl_password
-echo "sender_canonical_maps = hash:/etc/postfix/sender_canonical" >> /etc/postfix/main.cf
+
+# Sender
+echo "#sender_canonical_classes = envelope_sender, header_sender" >> /etc/postfix/main.cf
+echo "#sender_canonical_maps = regexp:/etc/postfix/sender_canonical" >> /etc/postfix/main.cf
 echo "" > /etc/postfix/sender_canonical
-postmap /etc/postfix/sender_canonical
+
+# Header
+echo "#smtp_header_checks = regexp:/etc/postfix/header_check" >> /etc/postfix/main.cf
+echo "" > /etc/postfix/header_check

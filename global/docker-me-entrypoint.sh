@@ -31,6 +31,7 @@ export POSTFIX_SMTP_PASSWORD
 export POSTFIX_SMTP_AUTHTLS
 export POSTFIX_SMTP_SENDER
 export RELAYHOST
+export RELAYHOST_PORT
 export DOCUMENT_ROOT
 export ALIASES
 export REMOTE_IP_PROXY
@@ -86,10 +87,10 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
 
   # Relayhost
   if [[ -n "${RELAYHOST}" ]]; then
-    sed -i "s/relayhost.*=.*/relayhost = ${RELAYHOST}/g" /etc/postfix/main.cf
+    sed -i "s/relayhost.*=.*/relayhost = ${RELAYHOST}:${RELAYHOST_PORT}/g" /etc/postfix/main.cf
   fi
 
-  # SASL @todo testen (mit gmx gehts noch nicht)
+  # SASL
   if [[ -n "${POSTFIX_SMTP_USERNAME}" ]]; then
     sed -i "s/smtp_sasl_auth_enable.*=.*/smtp_sasl_auth_enable = yes/g" /etc/postfix/main.cf
 
@@ -97,15 +98,25 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
       sed -i "s/smtp_tls_security_level.*=.*/smtp_tls_security_level = encrypt/g" /etc/postfix/main.cf
     fi
 
-    if [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
-      echo "${POSTFIX_SMTP_SENDER} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
+    if [[ -n "${POSTFIX_SMTP_USERNAME}" ]] && [[ -n "${RELAYHOST}" ]]; then
+      echo "${RELAYHOST} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
       postmap /etc/postfix/sasl_password
     fi
 
     if [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
-      echo "root ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
-      echo "www-data ${POSTFIX_SMTP_SENDER}" >> /etc/postfix/sender_canonical
-      postmap /etc/postfix/sender_canonical
+
+      # Sender
+      sed -i  "s/#sender_canonical_classes/sender_canonical_classes/g" /etc/postfix/main.cf
+      sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
+      # Header
+      sed -i "s/#smtp_header_checks/smtp_header_checks/g" /etc/postfix/main.cf
+
+      # header_check
+      echo "/From:.*/ REPLACE From: ${POSTFIX_SMTP_SENDER}" > /etc/postfix/header_check
+
+      # Sender (nicht genutzt -> sender_canonical_classes nur headers)
+      echo "/.+/ ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
+
     fi
   fi
 
