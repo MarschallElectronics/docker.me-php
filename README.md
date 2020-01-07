@@ -36,13 +36,14 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `SERVER_NAME` - Fully qualified domain name  (Default: me-php.garmisch.net)
 * `MYHOSTNAME` - Alias für SERVER_NAME für Postfix
 * `REMOTE_IP_PROXY` - IP Adresse des ReverseProxy (Default: Host_IP)
-* `RELAYHOST` - Domain des Relay Server
+* `RELAYHOST` - Adresse des Relay-Servers
+* `RELAYHOST_PORT` - Port des Relay-Servers
 * `POSTFIX_MYHOSTNAME` - Myhostname für Postfix
 * `POSTFIX_MYDESTINATION` - MYDESTINATION für Postfix (Default: localhost.localdomain, localhost)
 * `POSTFIX_SMTP_USERNAME` - USERNAME für SMTP-Versand (SASL-Auth)
 * `POSTFIX_SMTP_PASSWORD` - PASSWORD für SMTP-Versand (SASL-Auth)
 * `POSTFIX_SMTP_AUTHTLS` - SASL-Auth mit TLS [yes|no] (Default: no)
-* `POSTFIX_SMTP_SENDER` - Absender auf diese Mailadresse ändern (wird im Normalfall nicht benötigt)
+* `POSTFIX_SMTP_SENDER` - Absender auf diese Mailadresse ändern
 * `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
 * `ALIASES` - Eine Liste von Aliasen für den Apache mit ";" getrennt.
 * `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_
