@@ -30,6 +30,7 @@ export POSTFIX_SMTP_USERNAME
 export POSTFIX_SMTP_PASSWORD
 export POSTFIX_SMTP_AUTHTLS
 export POSTFIX_SMTP_SENDER
+export POSTFIX_SENDER_CANONICAL_MAPS
 export RELAYHOST
 export RELAYHOST_PORT
 export DOCUMENT_ROOT
@@ -104,7 +105,6 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
     fi
 
     if [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
-
       # Sender Classes
       sed -i  "s/#sender_canonical_classes/sender_canonical_classes/g" /etc/postfix/main.cf
 
@@ -114,10 +114,14 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
       # header_check
       echo "/From:.*/ REPLACE From: ${POSTFIX_SMTP_SENDER}" > /etc/postfix/header_check
 
-      # sender_canonical (wird nicht benötigt -- nicht nutzen sonst funktioniert REPLY-TO nicht)
-      #sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
-      #echo "/.+/ ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
+      # sender_canonical datei erstellen
+      echo "/.+/ ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
+    fi
 
+    # sender_canonical aktivieren
+    if [[ ${POSTFIX_SENDER_CANONICAL_MAPS} == 'yes' ]]; then
+      # (wird z.B. für gmx benötigt --> Vorsicht: REPLY-TO kann dann aber nicht gesetzt werden)
+      sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
     fi
   fi
 
