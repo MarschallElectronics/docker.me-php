@@ -105,17 +105,18 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
 
     if [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
 
-      # Sender
+      # Sender Classes
       sed -i  "s/#sender_canonical_classes/sender_canonical_classes/g" /etc/postfix/main.cf
-      sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
-      # Header
+
+      # Header Change
       sed -i "s/#smtp_header_checks/smtp_header_checks/g" /etc/postfix/main.cf
 
       # header_check
       echo "/From:.*/ REPLACE From: ${POSTFIX_SMTP_SENDER}" > /etc/postfix/header_check
 
-      # Sender (nicht genutzt -> sender_canonical_classes nur headers)
-      echo "/.+/ ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
+      # sender_canonical (wird nicht benötigt -- nicht nutzen sonst funktioniert REPLY-TO nicht)
+      #sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
+      #echo "/.+/ ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
 
     fi
   fi
