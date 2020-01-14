@@ -25,6 +25,7 @@ ENV SSL_VHOST="no"
 ENV SSL_CERT=""
 ENV SSL_CACERT=""
 ENV SSL_PRIVATEKEY=""
+ENV PHP_ENABLE_XDEBUG="no"
 
 # Config- und Script-Files
 COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/1_default-php.ini

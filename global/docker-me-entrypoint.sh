@@ -44,6 +44,7 @@ export SSL_VHOST
 export SSL_CERT
 export SSL_CACERT
 export SSL_PRIVATEKEY
+export PHP_ENABLE_XDEBUG
 
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
 DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
@@ -59,6 +60,18 @@ set -x
 
 if [[ -n "${SERVER_NAME}" ]] && [[ -f /etc/apache2/apache2.conf ]] && [[ -z "$(mount | grep /etc/apache2/apache2.conf)" ]]; then
   echo "ServerName ${SERVER_NAME}" >>/etc/apache2/apache2.conf
+fi
+
+set +x
+echo "###############################################"
+echo "# PHP Extensions "
+echo "###############################################"
+set -x
+
+if [[ ${PHP_ENABLE_XDEBUG} == 'yes' ]]; then
+  sed -i "s/;zend_extension/zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+else
+  sed -i "s/^zend_extension/;zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 fi
 
 set +x
