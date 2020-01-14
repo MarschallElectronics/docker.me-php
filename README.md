@@ -54,6 +54,7 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `SSL_CERT` - _Pfad zum SSL-Zertifikat (bsp: /etc/ssl/sslvw/mycandy.de/certificate.crt)_
 * `SSL_CACERT` - _Pfad zum SSL-CA-Zertifikat (bsp: /etc/ssl/sslvw/mycandy.de/cert.bundle)_
 * `SSL_PRIVATEKEY` - _Pfad zum SSL-Private-Key (bsp: /etc/ssl/sslvw/mycandy.de/private.key)_
+* `PHP_ENABLE_XDEBUG` - _XDEBUG PHP-Extension aktivieren / mit Option um Modul-Datei zu aktivieren [yes|no] (Default: no)_
 
 ### docker-compose.yml
 
