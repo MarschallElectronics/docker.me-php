@@ -46,11 +46,17 @@ export SSL_CACERT
 export SSL_PRIVATEKEY
 export PHP_ENABLE_XDEBUG
 
+# DOCKER_HOST_IP über Route setzen
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
-DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
+if [[ "${DOCKER_HOST_IP}" == '127.0.0.1' ]]; then
+  DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
+fi
 
-# Fullqualified Hostname
-MYHOSTNAME=$(hostname --fqdn)
+# Fullqualified Hostname setzen
+# @todo: funzt nicht, muss auch über command gemacht werden
+if [[ "${MYHOSTNAME}" == 'docker.garmisch.net' ]]; then
+  MYHOSTNAME=$(hostname --fqdn)
+fi
 
 set +x
 echo "###############################################"
