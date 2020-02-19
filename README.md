@@ -44,6 +44,8 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `POSTFIX_SMTP_PASSWORD` - PASSWORD für SMTP-Versand (SASL-Auth)
 * `POSTFIX_SMTP_AUTHTLS` - SASL-Auth mit TLS [yes|no] (Default: no)
 * `POSTFIX_SMTP_SENDER` - Absender auf diese Mailadresse ändern
+* `POSTFIX_SENDER_CANONICAL_MAPS` - sender_canonical_maps aktivieren. Absender-Adresse wird auf POSTFIX_SMTP_SENDER gesetzt. Vorsicht: REPLY-TO funktioniert damit nicht!
+* `POSTFIX_SENDER_HEADER_CHANGE` - smtp_header_checks aktivieren. Absender-Adresse wird auf POSTFIX_SMTP_SENDER gesetzt. Vorsicht: Hostname muss valid und auflösbar sein!
 * `DOCUMENT_ROOT` - Document Root für apache (Ordner der index.html/php)
 * `ALIASES` - Eine Liste von Aliasen für den Apache mit ";" getrennt.
 * `START_RSYSLOGD` - _Soll der Syslog-Daemon gestartet werden (Default: no)_

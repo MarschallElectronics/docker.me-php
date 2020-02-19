@@ -115,7 +115,6 @@ echo "" > /etc/postfix/sasl_password
 postmap /etc/postfix/sasl_password
 
 # Sender
-echo "#sender_canonical_classes = envelope_sender, header_sender" >> /etc/postfix/main.cf
 echo "#sender_canonical_maps = regexp:/etc/postfix/sender_canonical" >> /etc/postfix/main.cf
 echo "" > /etc/postfix/sender_canonical
 

@@ -31,6 +31,7 @@ export POSTFIX_SMTP_PASSWORD
 export POSTFIX_SMTP_AUTHTLS
 export POSTFIX_SMTP_SENDER
 export POSTFIX_SENDER_CANONICAL_MAPS
+export POSTFIX_SENDER_HEADER_CHANGE
 export RELAYHOST
 export RELAYHOST_PORT
 export DOCUMENT_ROOT
@@ -49,13 +50,13 @@ export PHP_ENABLE_XDEBUG
 # DOCKER_HOST_IP über Route setzen
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
 if [[ "${DOCKER_HOST_IP}" == '127.0.0.1' ]]; then
-  DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
+  #DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
 fi
 
 # Fullqualified Hostname setzen
 # @todo: funzt nicht, muss auch über command gemacht werden
 if [[ "${MYHOSTNAME}" == 'docker.garmisch.net' ]]; then
-  MYHOSTNAME=$(hostname --fqdn)
+  #MYHOSTNAME=$(hostname --fqdn)
 fi
 
 set +x
@@ -111,7 +112,7 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
   fi
 
   # SASL
-  if [[ -n "${POSTFIX_SMTP_USERNAME}" ]]; then
+  if [[ -n "${POSTFIX_SMTP_USERNAME}" ]] && [[ -n "${POSTFIX_SMTP_PASSWORD}" ]]; then
     sed -i "s/smtp_sasl_auth_enable.*=.*/smtp_sasl_auth_enable = yes/g" /etc/postfix/main.cf
 
     if [[ ${POSTFIX_SMTP_AUTHTLS} == 'yes' ]]; then
@@ -122,26 +123,24 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
       echo "${RELAYHOST} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
       postmap /etc/postfix/sasl_password
     fi
+  fi
 
-    if [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
-      # Sender Classes
-      sed -i  "s/#sender_canonical_classes/sender_canonical_classes/g" /etc/postfix/main.cf
+  # Header-Change aktivieren
+  if [[ ${POSTFIX_SENDER_HEADER_CHANGE} == 'yes' ]] && [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
+    # Header-Change
+    sed -i "s/#smtp_header_checks/smtp_header_checks/g" /etc/postfix/main.cf
 
-      # Header Change
-      sed -i "s/#smtp_header_checks/smtp_header_checks/g" /etc/postfix/main.cf
+    # header_check
+    echo "/From:.*/ REPLACE From: ${POSTFIX_SMTP_SENDER}" > /etc/postfix/header_check
+  fi
 
-      # header_check
-      echo "/From:.*/ REPLACE From: ${POSTFIX_SMTP_SENDER}" > /etc/postfix/header_check
+  # sender_canonical_maps aktivieren
+  if [[ ${POSTFIX_SENDER_CANONICAL_MAPS} == 'yes' ]] && [[ -n "${POSTFIX_SMTP_SENDER}" ]]; then
+    # sender_canonical datei erstellen
+    echo "/.+/ ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
 
-      # sender_canonical datei erstellen
-      echo "/.+/ ${POSTFIX_SMTP_SENDER}" > /etc/postfix/sender_canonical
-    fi
-
-    # sender_canonical aktivieren
-    if [[ ${POSTFIX_SENDER_CANONICAL_MAPS} == 'yes' ]]; then
-      # (wird z.B. für gmx benötigt --> Vorsicht: REPLY-TO kann dann aber nicht gesetzt werden)
-      sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
-    fi
+    # (wird z.B. für gmx benötigt --> Vorsicht: REPLY-TO kann dann aber nicht gesetzt werden)
+    sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
   fi
 
 fi
