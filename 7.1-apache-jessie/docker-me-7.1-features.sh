@@ -16,6 +16,11 @@ pecl install apcu \
 	&& docker-php-ext-enable apcu \
 	&& docker-php-ext-install iconv mbstring mcrypt
 
+echo "# install: php gdlib"
+echo "-------------------------------"
+docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
+  && docker-php-ext-install gd && docker-php-ext-enable gd
+
 echo "# install: sqlsrv pdo_sqlsrv"
 echo "-------------------------------"
 export ACCEPT_EULA=Y
