@@ -75,10 +75,12 @@ echo "# PHP Extensions "
 echo "###############################################"
 set -x
 
-if [[ ${PHP_ENABLE_XDEBUG} == 'yes' ]]; then
-  sed -i "s/;zend_extension/zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-else
-  sed -i "s/^zend_extension/;zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]]; then
+  if [[ ${PHP_ENABLE_XDEBUG} == 'yes' ]]; then
+    sed -i "s/;zend_extension/zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  else
+    sed -i "s/^zend_extension/;zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  fi
 fi
 
 set +x

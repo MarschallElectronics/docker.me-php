@@ -39,8 +39,7 @@ echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen \
 
 echo "# + install PHP-Extensions: GD, Mysql, Mysqli, Soap, Xdebug, ..."
 echo "-------------------------------"
-docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
-  && docker-php-ext-install gd && docker-php-ext-enable gd \
+docker-php-ext-install gd && docker-php-ext-enable gd \
   && docker-php-ext-install pdo pdo_mysql pdo_sqlite && docker-php-ext-enable pdo pdo_mysql pdo_sqlite \
   && docker-php-ext-install mysqli && docker-php-ext-enable mysqli \
   && docker-php-ext-install soap && docker-php-ext-enable soap \
