@@ -49,15 +49,15 @@ export PHP_ENABLE_XDEBUG
 
 # DOCKER_HOST_IP über Route setzen
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
-if [[ "${DOCKER_HOST_IP}" == '127.0.0.1' ]]; then
-  #DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
-fi
+#if [[ "${DOCKER_HOST_IP}" == '127.0.0.1' ]]; then
+#  DOCKER_HOST_IP="$(/sbin/ip route | awk '/default/ { print $3 }')"
+#fi
 
 # Fullqualified Hostname setzen
 # @todo: funzt nicht, muss auch über command gemacht werden
-if [[ "${MYHOSTNAME}" == 'docker.garmisch.net' ]]; then
-  #MYHOSTNAME=$(hostname --fqdn)
-fi
+#if [[ "${MYHOSTNAME}" == 'docker.garmisch.net' ]]; then
+#  MYHOSTNAME=$(hostname --fqdn)
+#fi
 
 set +x
 echo "###############################################"
