@@ -17,8 +17,10 @@ pecl install apcu \
 	&& docker-php-ext-enable apcu \
 	&& docker-php-ext-install iconv
 
-	# @todo install von mbstring funzt nicht
-	# docker-php-ext-install mbstring
+# mbstring benötigt libonig-dev (gibts nicht über apt-get)
+wget -P /tmp/ http://ftp.de.debian.org/debian/pool/main/libo/libonig/libonig-dev_6.9.1-1_amd64.deb \
+  && dpkg -i /tmp/libonig-dev_6.9.1-1_amd64.deb \
+  && docker-php-ext-install mbstring
 
 echo "# install: sqlsrv pdo_sqlsrv"
 echo "-------------------------------"
@@ -27,10 +29,8 @@ curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
 	&& curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
 	&& apt-get update \
 	&& apt-get -y --no-install-recommends install msodbcsql17 unixodbc-dev mssql-tools \
-	&& odbcinst -j
-
-	# @todo install von sqlsrv funzt nicht
-	#&& pecl install sqlsrv \
-	#&& docker-php-ext-enable sqlsrv \
-	#&& pecl install pdo_sqlsrv \
-	#&& docker-php-ext-enable pdo_sqlsrv
+	&& odbcinst -j \
+	&& pecl install sqlsrv \
+  && docker-php-ext-enable sqlsrv \
+	&& pecl install pdo_sqlsrv \
+	&& docker-php-ext-enable pdo_sqlsrv
