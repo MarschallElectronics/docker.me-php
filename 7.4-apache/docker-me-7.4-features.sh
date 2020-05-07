@@ -8,8 +8,7 @@ echo "###############################################"
 
 echo "# + install diverse Apps"
 echo "-------------------------------"
-# @todo install von mysql-client funzt nicht
-#apt-get install -y mysql-client
+apt-get install -y mariadb-client-10.3
 
 echo "# install: php apcu, iconv, mbstring"
 echo "-------------------------------"
