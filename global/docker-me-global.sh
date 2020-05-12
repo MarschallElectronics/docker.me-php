@@ -74,10 +74,12 @@ a2enmod rewrite \
 
 echo "# + install PHP Composer"
 echo "-------------------------------"
-php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" \
-  && php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'PHP-Composer-Installer verified'; } else { echo 'PHP-Composer-Installer corrupt'; unlink('/tmp/composer-setup.php'); } echo PHP_EOL;" \
+wget -O /tmp/composer-setup.php --no-check-certificate 'https://getcomposer.org/installer' \
+  && wget -O /tmp/composer-setup.sig --no-check-certificate 'https://composer.github.io/installer.sig' \
+  && php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'PHP-Composer-Installer verified'; } else { echo 'PHP-Composer-Installer corrupt'; unlink('/tmp/composer-setup.php'); } echo PHP_EOL;" \
   && php /tmp/composer-setup.php --quiet --install-dir=/usr/local/bin --filename=composer \
-  && rm /tmp/composer-setup.php
+  && rm /tmp/composer-setup.php \
+  && rm /tmp/composer-setup.sig
 
 echo "# + install NodeJS"
 echo "-------------------------------"
