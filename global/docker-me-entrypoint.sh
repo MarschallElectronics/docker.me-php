@@ -46,6 +46,7 @@ export SSL_CERT
 export SSL_CACERT
 export SSL_PRIVATEKEY
 export PHP_ENABLE_XDEBUG
+export PHP_ENABLE_SQLSRV
 
 # DOCKER_HOST_IP über Route setzen
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
@@ -76,10 +77,20 @@ echo "###############################################"
 set -x
 
 if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]]; then
+  echo "# PHP_ENABLE_XDEBUG: ${PHP_ENABLE_XDEBUG}"
   if [[ ${PHP_ENABLE_XDEBUG} == 'yes' ]]; then
-    sed -i "s/;zend_extension/zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    sed -i "s/^;zend_extension=/zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
   else
-    sed -i "s/^zend_extension/;zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    sed -i "s/^zend_extension=/;zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  fi
+fi
+
+if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini ]]; then
+  echo "# PHP_ENABLE_SQLSRV: ${PHP_ENABLE_SQLSRV}"
+  if [[ ${PHP_ENABLE_SQLSRV} == 'yes' ]]; then
+    sed -i "s/^;extension=/extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
+  else
+    sed -i "s/^extension=/;extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
   fi
 fi
 
