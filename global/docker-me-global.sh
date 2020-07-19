@@ -121,3 +121,8 @@ echo "" > /etc/postfix/sender_canonical
 # Header
 echo "#smtp_header_checks = regexp:/etc/postfix/header_check" >> /etc/postfix/main.cf
 echo "" > /etc/postfix/header_check
+
+# smtputf8_enable
+echo "#smtputf8_enable = no" >> /etc/postfix/main.cf
+
+
