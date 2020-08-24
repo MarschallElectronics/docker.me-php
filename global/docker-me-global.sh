@@ -93,6 +93,10 @@ echo "-------------------------------"
 wget https://get.symfony.com/cli/installer -O - | bash
 mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
+echo "# + install PerlMagick"
+echo "-------------------------------"
+apt-get install -y perlmagick
+
 echo "# + install Apache Vhost"
 echo "-------------------------------"
 a2dissite 000-default \
