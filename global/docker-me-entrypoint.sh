@@ -32,6 +32,7 @@ export POSTFIX_SMTP_AUTHTLS
 export POSTFIX_SMTP_SENDER
 export POSTFIX_SENDER_CANONICAL_MAPS
 export POSTFIX_SENDER_HEADER_CHANGE
+export POSTFIX_SMTPUTF8_ENABLE
 export RELAYHOST
 export RELAYHOST_PORT
 export DOCUMENT_ROOT
@@ -46,6 +47,7 @@ export SSL_CERT
 export SSL_CACERT
 export SSL_PRIVATEKEY
 export PHP_ENABLE_XDEBUG
+export PHP_ENABLE_SQLSRV
 
 # DOCKER_HOST_IP über Route setzen
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
@@ -76,10 +78,20 @@ echo "###############################################"
 set -x
 
 if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]]; then
+  echo "# PHP_ENABLE_XDEBUG: ${PHP_ENABLE_XDEBUG}"
   if [[ ${PHP_ENABLE_XDEBUG} == 'yes' ]]; then
-    sed -i "s/;zend_extension/zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    sed -i "s/^;zend_extension=/zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
   else
-    sed -i "s/^zend_extension/;zend_extension/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    sed -i "s/^zend_extension=/;zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  fi
+fi
+
+if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini ]]; then
+  echo "# PHP_ENABLE_SQLSRV: ${PHP_ENABLE_SQLSRV}"
+  if [[ ${PHP_ENABLE_SQLSRV} == 'yes' ]]; then
+    sed -i "s/^;extension=/extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
+  else
+    sed -i "s/^extension=/;extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
   fi
 fi
 
@@ -143,6 +155,11 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
 
     # (wird z.B. für gmx benötigt --> Vorsicht: REPLY-TO kann dann aber nicht gesetzt werden)
     sed -i  "s/#sender_canonical_maps/sender_canonical_maps/g" /etc/postfix/main.cf
+  fi
+
+  # POSTFIX_SMTPUTF8_ENABLE auf no setzen
+  if [[ ${POSTFIX_SMTPUTF8_ENABLE} == 'no' ]]; then
+    sed -i  "s/#smtputf8_enable = no/smtputf8_enable = no/g" /etc/postfix/main.cf
   fi
 
 fi
