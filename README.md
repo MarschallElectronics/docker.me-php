@@ -8,11 +8,18 @@ Die me-php Images geben eine schnelle und einfache Möglichkeit einen Webserver 
 Man erstellt eine docker-compose.yml unter /srv/www/vhosts/`me-team.net`/docker/docker-compose.yml <br>
 Diese wird wie im nächsten punkt erläutert.
 
-### Versionen:
+#### Versionen:
+
 Versionen des me-php Images werden mit dem Tag unterschieden, welches nach dem ":" steht.<br> 
 Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Images nicht.
 
-### Apache-Module:
+#### Bash-Scripts:
+
+Alle Bash-Scripts sollten mit Linux-Zeilenumbrüchen (LF) erstellt werden, damit Docker unter Linux damit klar kommt.
+Die Docker-Images werden auf Rhea erstellt.  
+
+#### Apache-Module:
+
 core_module, so_module, watchdog_module, http_module, log_config_module, logio_module, version_module, unixd_module, 
 access_compat_module, alias_module, auth_basic_module, authn_core_module, authn_file_module, authz_core_module, 
 authz_host_module, authz_user_module, autoindex_module, deflate_module, dir_module, env_module, filter_module, 
@@ -128,7 +135,7 @@ Zum Beenden dient der Befehl:
 ```
 systemctl stop docker-me-team.service
 ```
-## SSL auf Container durchschleifen
+## HTTPS auf Container durchschleifen
 
 In der default vhost.conf wird automatisch "HTTPS=on" gesetzt wenn der RequestHeader "X-Forwarded-Proto" auf "https" gesetzt ist.<br>
 Um diesen Header übergeben zu können muss im Hostsystem die vhost.conf für das jeweilige hosting angepasst werden.<br> 
