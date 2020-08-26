@@ -10,8 +10,8 @@ MAINTAINER Bene Reuthlinger <br@garmisch.net>
 ENV TZ="Europe/Berlin"
 
 # Config- und Script-Files
-COPY ../5.3-apache/docker-me-5.3-features.sh /usr/local/bin/docker-me-5.3-features.sh
-COPY ../global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
+COPY ./5.3-apache/docker-me-5.3-features.sh /usr/local/bin/docker-me-5.3-features.sh
+COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
 
 # ausführbar machen
 RUN chmod +x /usr/local/bin/docker-me-5.3-features.sh

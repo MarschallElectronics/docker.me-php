@@ -1,13 +1,10 @@
 #!/bin/bash
 
-bash BuildAndPush.sh 5.6-apache/Dockerfile \
-  && bash BuildAndPush.sh 7.0-apache/Dockerfile \
-  && bash BuildAndPush.sh 7.1-apache/Dockerfile \
-  && bash BuildAndPush.sh 7.1-apache-jessie/Dockerfile \
-  && bash BuildAndPush.sh 7.1-apache-sqlsrv/Dockerfile \
-  && bash BuildAndPush.sh 7.2-apache/Dockerfile \
-  && bash BuildAndPush.sh 7.3-apache/Dockerfile \
-  && bash BuildAndPush.sh 7.4-apache/Dockerfile \
-  || exit 1
-
-exit 0
+bash BuildAndPush.sh Dockerfile-5.6-apache
+bash BuildAndPush.sh Dockerfile-7.0-apache
+bash BuildAndPush.sh Dockerfile-7.1-apache
+bash BuildAndPush.sh Dockerfile-7.1-apache-jessie
+bash BuildAndPush.sh Dockerfile-7.1-apache-sqlsrv
+bash BuildAndPush.sh Dockerfile-7.2-apache
+bash BuildAndPush.sh Dockerfile-7.3-apache
+bash BuildAndPush.sh Dockerfile-7.4-apache

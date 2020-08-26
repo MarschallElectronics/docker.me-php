@@ -18,16 +18,6 @@ Bis auf die PHP Version und davon abhängige Versionen unterscheiden sich die Im
 Alle Bash-Scripts sollten mit Linux-Zeilenumbrüchen (LF) erstellt werden, damit Docker unter Linux damit klar kommt.
 Die Docker-Images werden auf Rhea erstellt.  
 
-#### Build-Scripts:
-
-```
-Ein bestimmtes Docker-Image erstellen: 
-./BuildAndPush.sh 7.1-apache/Dockerfile
-
-Alle Docker-Images erstellen:
-./BuildAndPushAll.sh
-```
-
 #### Apache-Module:
 
 core_module, so_module, watchdog_module, http_module, log_config_module, logio_module, version_module, unixd_module, 
