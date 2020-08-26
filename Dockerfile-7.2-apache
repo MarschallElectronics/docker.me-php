@@ -38,12 +38,15 @@ COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
 COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
 COPY ./7.2-apache/docker-me-7.2-features.sh /usr/local/bin/docker-me-7.2-features.sh
 COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
+COPY ./global/config/rc-local.service /lib/systemd/system/rc-local.service
+COPY ./global/config/rc.local /etc/rc.local
 
 # ausführbar machen
 RUN	chmod +x /usr/local/bin/docker-me-global.sh
 RUN chmod +x /usr/local/bin/docker-me-7.2-features.sh
 RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
 RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
+RUN chmod +x /etc/rc.local
 
 # ausführen
 RUN /usr/local/bin/docker-me-global.sh
