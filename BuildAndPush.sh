@@ -10,8 +10,10 @@ fi
 
 if [ "X" != "X${TAG}" ]
 then
-	docker build --no-cache -t marschallelectronics/me-php:${TAG} -f ${DOCKERFILE} . \
-	&& docker push marschallelectronics/me-php:${TAG}
+	docker build --no-cache -t marschallelectronics/me-php:${TAG} -f ${DOCKERFILE} .
+	docker push marschallelectronics/me-php:${TAG}
 else
 	echo "No TAG available!"
 fi
+
+exit 0
