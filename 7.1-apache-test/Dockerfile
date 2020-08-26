@@ -1,4 +1,4 @@
-FROM php:7.4-apache-buster
+FROM php:7.1-apache-stretch
 MAINTAINER Bene Reuthlinger <br@garmisch.net>
 
 ENV TZ="Europe/Berlin"
@@ -31,23 +31,26 @@ ENV PHP_ENABLE_XDEBUG="no"
 ENV PHP_ENABLE_SQLSRV="no"
 
 # Config- und Script-Files
-COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/1_default-php.ini
-COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
-COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
-COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
-COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
-COPY ./7.4-apache/docker-me-7.4-features.sh /usr/local/bin/docker-me-7.4-features.sh
-COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
+COPY ../global/config/1_default-php.ini /usr/local/etc/php/conf.d/1_default-php.ini
+COPY ../global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
+COPY ../global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
+COPY ../global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
+COPY ../global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
+COPY ../7.1-apache-test/docker-me-7.1-features.sh /usr/local/bin/docker-me-7.1-features.sh
+COPY ../global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
+COPY ../global/config/rc-local.service /lib/systemd/system/rc-local.service
+COPY ../global/config/rc.local /etc/rc.local
 
 # ausführbar machen
 RUN	chmod +x /usr/local/bin/docker-me-global.sh
-RUN chmod +x /usr/local/bin/docker-me-7.4-features.sh
+RUN chmod +x /usr/local/bin/docker-me-7.1-features.sh
 RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
 RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
+RUN chmod +x /etc/rc.local
 
 # ausführen
 RUN /usr/local/bin/docker-me-global.sh
-RUN /usr/local/bin/docker-me-7.4-features.sh
+RUN /usr/local/bin/docker-me-7.1-features.sh
 RUN /usr/local/bin/docker-me-cleanup.sh
 
 # Ports freigeben
@@ -56,4 +59,3 @@ EXPOSE 443
 
 ENTRYPOINT ["/usr/local/bin/docker-me-entrypoint.sh"]
 CMD ["apache2-foreground"]
-
