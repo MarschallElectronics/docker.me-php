@@ -10,6 +10,11 @@ echo "# + install diverse Apps"
 echo "-------------------------------"
 apt-get install -y mysql-client
 
+echo "# Systemd & rc.local"
+echo "-------------------------------"
+apt-get install -y systemd \
+  && systemctl enable rc-local
+
 echo "# install: php apcu, iconv, mbstring"
 echo "-------------------------------"
 pecl install apcu \

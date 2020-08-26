@@ -10,6 +10,11 @@ echo "# + install diverse Apps"
 echo "-------------------------------"
 apt-get install -y mysql-client
 
+echo "# Systemd & rc.local"
+echo "-------------------------------"
+apt-get install -y systemd \
+  && systemctl enable rc-local
+
 echo "# install: php gdlib"
 echo "-------------------------------"
 docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
