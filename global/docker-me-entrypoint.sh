@@ -41,6 +41,7 @@ export REMOTE_IP_PROXY
 export START_RSYSLOGD
 export START_CROND
 export START_POSTFIX
+export START_RCLOCAL
 export APACHE_TIMEOUT
 export SSL_VHOST
 export SSL_CERT
@@ -60,6 +61,16 @@ export PHP_ENABLE_SQLSRV
 #if [[ "${MYHOSTNAME}" == 'docker.garmisch.net' ]]; then
 #  MYHOSTNAME=$(hostname --fqdn)
 #fi
+
+set +x
+echo "###############################################"
+echo "# AUTOSTART /etc/me-autostart.sh"
+echo "###############################################"
+set -x
+
+if [[ ${START_ME_AUTOSTART} == 'yes' ]]; then
+  /bin/bash /etc/me-autostart.sh
+fi
 
 set +x
 echo "###############################################"

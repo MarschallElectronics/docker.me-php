@@ -22,6 +22,7 @@ ENV REMOTE_IP_PROXY=""
 ENV START_RSYSLOGD="no"
 ENV START_CROND="no"
 ENV START_POSTFIX="yes"
+ENV START_ME_AUTOSTART="yes"
 ENV APACHE_TIMEOUT="300"
 ENV SSL_VHOST="no"
 ENV SSL_CERT=""
@@ -38,15 +39,14 @@ COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
 COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
 COPY ./7.1-apache/docker-me-7.1-features.sh /usr/local/bin/docker-me-7.1-features.sh
 COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
-COPY ./global/config/rc-local.service /lib/systemd/system/rc-local.service
-COPY ./global/config/rc.local /etc/rc.local
+COPY ./global/config/me-autostart.sh /etc/me-autostart.sh
 
 # ausführbar machen
 RUN	chmod +x /usr/local/bin/docker-me-global.sh
 RUN chmod +x /usr/local/bin/docker-me-7.1-features.sh
 RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
 RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
-RUN chmod +x /etc/rc.local
+RUN chmod +x /etc/me-autostart.sh
 
 # ausführen
 RUN /usr/local/bin/docker-me-global.sh

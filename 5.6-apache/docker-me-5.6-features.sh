@@ -10,12 +10,8 @@ echo "# + install diverse Apps"
 echo "-------------------------------"
 apt-get install -y mysql-client
 
-echo "# Systemd & rc.local"
-echo "-------------------------------"
-apt-get install -y systemd \
-  && systemctl enable rc-local
-
 echo "# PHP-Ext: APCU 4.0.11, Mysql, Mcrypt (Deprecated in 7.2)"
+echo "-------------------------------"
 pecl install apcu-4.0.11 \
 	&& docker-php-ext-enable apcu \
 	&& docker-php-ext-install mysql mcrypt
