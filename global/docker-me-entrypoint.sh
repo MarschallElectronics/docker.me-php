@@ -49,6 +49,7 @@ export SSL_CACERT
 export SSL_PRIVATEKEY
 export PHP_ENABLE_XDEBUG
 export PHP_ENABLE_SQLSRV
+export ADMIN_MAILADDRESS
 
 # DOCKER_HOST_IP über Route setzen
 # @todo funzt nicht weil netzwerk zum entrypoint-zeitpunkt noch nicht aktiv ist -> über command lösen
@@ -61,6 +62,28 @@ export PHP_ENABLE_SQLSRV
 #if [[ "${MYHOSTNAME}" == 'docker.garmisch.net' ]]; then
 #  MYHOSTNAME=$(hostname --fqdn)
 #fi
+
+set +x
+echo "###############################################"
+echo "# Diverses"
+echo "###############################################"
+set -x
+
+# Rechte für crontab setzen
+chmod 744 /etc/crontab
+chown root:root /etc/crontab
+
+set +x
+echo "###############################################"
+echo "# ALIASES auf Admin-Mail setzen"
+echo "###############################################"
+set -x
+
+# aliases
+if [[ -n "${ADMIN_MAILADDRESS}" ]]; then
+  echo "root:$ADMIN_MAILADDRESS" >> /etc/aliases
+  newaliases
+fi
 
 set +x
 echo "###############################################"
