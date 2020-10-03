@@ -168,7 +168,7 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
     fi
 
     if [[ -n "${POSTFIX_SMTP_USERNAME}" ]] && [[ -n "${RELAYHOST}" ]]; then
-      echo "${RELAYHOST} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
+      echo "${RELAYHOST}:${RELAYHOST_PORT} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
       postmap /etc/postfix/sasl_password
     fi
   fi
