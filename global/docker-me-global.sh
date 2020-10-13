@@ -39,7 +39,8 @@ echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen \
 
 echo "# + install PHP-Extensions: GD, Mysql, Mysqli, Soap, Xdebug, ..."
 echo "-------------------------------"
-docker-php-ext-install pdo pdo_mysql pdo_sqlite && docker-php-ext-enable pdo pdo_mysql pdo_sqlite \
+pear config-set php_ini /usr/local/etc/php/php.ini \
+  && docker-php-ext-install pdo pdo_mysql pdo_sqlite && docker-php-ext-enable pdo pdo_mysql pdo_sqlite \
   && docker-php-ext-install mysqli && docker-php-ext-enable mysqli \
   && docker-php-ext-install soap && docker-php-ext-enable soap \
   && docker-php-ext-install pcntl && docker-php-ext-enable pcntl \

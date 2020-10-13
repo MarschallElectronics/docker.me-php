@@ -33,7 +33,7 @@ ENV PHP_ENABLE_SQLSRV="no"
 ENV ADMIN_MAILADDRESS="webteam@garmisch.net"
 
 # Config- und Script-Files
-COPY ./global/config/1_default-php.ini /usr/local/etc/php/conf.d/1_default-php.ini
+COPY ./global/config/php.ini /usr/local/etc/php/php.ini
 COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
 COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
 COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
