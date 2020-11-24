@@ -65,6 +65,9 @@ Für diese Images gibt es folgende Envorinment-Variablen: <br>
 * `SSL_PRIVATEKEY` - _Pfad zum SSL-Private-Key (bsp: /etc/ssl/sslvw/mycandy.de/private.key)_
 * `PHP_ENABLE_XDEBUG` - _XDEBUG PHP-Extension aktivieren / mit Option um Modul-Datei zu aktivieren [yes|no] (Default: no)_
 * `PHP_ENABLE_SQLSRV` - _SQLSRV PHP-Extension aktivieren / mit Option um Modul-Datei zu aktivieren [yes|no] (Default: no)_
+* `PHP_ENABLE_IMAGICK` - _IMAGICK PHP-Extension aktivieren / mit Option um Modul-Datei zu aktivieren [yes|no] (Default: no)_
+* `PHP_ENABLE_APCU` - _APCU PHP-Extension aktivieren / mit Option um Modul-Datei zu aktivieren [yes|no] (Default: no)_
+* `PHP_ENABLE_OAUTH` - _OAUTH PHP-Extension aktivieren / mit Option um Modul-Datei zu aktivieren [yes|no] (Default: no)_
 * `START_ME_AUTOSTART` - Das Script "/etc/me-autostart.sh" wird beim Starten des Containers ausgeführt. Wird bspw. zum Anlegen von Mountpoints verwendet. [yes|no] (Default: yes) 
 
 ### docker-compose.yml
