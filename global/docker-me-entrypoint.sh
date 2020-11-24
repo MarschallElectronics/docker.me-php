@@ -117,44 +117,66 @@ set -x
 # XDEBUG (alt: docker-php-ext-xdebug.ini, neu: php.ini)
 echo "# PHP_ENABLE_XDEBUG: ${PHP_ENABLE_XDEBUG}"
 if [[ ${PHP_ENABLE_XDEBUG} == 'yes' ]]; then
-  sed -i "s/^;zend_extension=/zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-  sed -i "s/^;zend_extension=\"xdebug.so\"/zend_extension=\"xdebug.so\"/g" /usr/local/etc/php/php.ini
+  if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]]; then
+    sed -i "s/^;zend_extension=/zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  fi
+  if [[ -f /usr/local/etc/php/php.ini ]]; then
+    sed -i "s/^;zend_extension=\"xdebug.so\"/zend_extension=\"xdebug.so\"/g" /usr/local/etc/php/php.ini
+  fi
 else
-  sed -i "s/^zend_extension=/;zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-  sed -i "s/^zend_extension=\"xdebug.so\"/;zend_extension=\"xdebug.so\"/g" /usr/local/etc/php/php.ini
+  if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]]; then
+    sed -i "s/^zend_extension=/;zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  fi
+  if [[ -f /usr/local/etc/php/php.ini ]]; then
+    sed -i "s/^zend_extension=\"xdebug.so\"/;zend_extension=\"xdebug.so\"/g" /usr/local/etc/php/php.ini
+  fi
 fi
 
 # SQLSRV (alt: docker-php-ext-sqlsrv.ini, neu: php.ini)
 echo "# PHP_ENABLE_SQLSRV: ${PHP_ENABLE_SQLSRV}"
 if [[ ${PHP_ENABLE_SQLSRV} == 'yes' ]]; then
-  sed -i "s/^;extension=/extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
-  sed -i "s/^;extension=\"sqlsrv.so\"/extension=\"sqlsrv.so\"/g" /usr/local/etc/php/php.ini
-  sed -i "s/^;extension=\"pdo_sqlsrv.so\"/extension=\"pdo_sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+  if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini ]]; then
+      sed -i "s/^;extension=/extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
+  fi
+  if [[ -f /usr/local/etc/php/php.ini ]]; then
+    sed -i "s/^;extension=\"sqlsrv.so\"/extension=\"sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+    sed -i "s/^;extension=\"pdo_sqlsrv.so\"/extension=\"pdo_sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+  fi
 else
-  sed -i "s/^extension=/;extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
-  sed -i "s/^extension=\"sqlsrv.so\"/;extension=\"sqlsrv.so\"/g" /usr/local/etc/php/php.ini
-  sed -i "s/^extension=\"pdo_sqlsrv.so\"/;extension=\"pdo_sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+  if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini ]]; then
+    sed -i "s/^extension=/;extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
+  fi
+  if [[ -f /usr/local/etc/php/php.ini ]]; then
+    sed -i "s/^extension=\"sqlsrv.so\"/;extension=\"sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+    sed -i "s/^extension=\"pdo_sqlsrv.so\"/;extension=\"pdo_sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+  fi
 fi
 
 echo "# PHP_ENABLE_IMAGICK: ${PHP_ENABLE_IMAGICK}"
-if [[ ${PHP_ENABLE_IMAGICK} == 'yes' ]]; then
-  sed -i "s/^;extension=\"imagick.so\"/extension=\"imagick.so\"/g" /usr/local/etc/php/php.ini
-else
-  sed -i "s/^extension=\"imagick.so\"/;extension=\"imagick.so\"/g" /usr/local/etc/php/php.ini
+if [[ -f /usr/local/etc/php/php.ini ]]; then
+  if [[ ${PHP_ENABLE_IMAGICK} == 'yes' ]]; then
+    sed -i "s/^;extension=\"imagick.so\"/extension=\"imagick.so\"/g" /usr/local/etc/php/php.ini
+  else
+    sed -i "s/^extension=\"imagick.so\"/;extension=\"imagick.so\"/g" /usr/local/etc/php/php.ini
+  fi
 fi
 
 echo "# PHP_ENABLE_APCU: ${PHP_ENABLE_APCU}"
-if [[ ${PHP_ENABLE_APCU} == 'yes' ]]; then
-  sed -i "s/^;extension=\"apcu.so\"/extension=\"apcu.so\"/g" /usr/local/etc/php/php.ini
-else
-  sed -i "s/^extension=\"apcu.so\"/;extension=\"apcu.so\"/g" /usr/local/etc/php/php.ini
+if [[ -f /usr/local/etc/php/php.ini ]]; then
+  if [[ ${PHP_ENABLE_APCU} == 'yes' ]]; then
+    sed -i "s/^;extension=\"apcu.so\"/extension=\"apcu.so\"/g" /usr/local/etc/php/php.ini
+  else
+    sed -i "s/^extension=\"apcu.so\"/;extension=\"apcu.so\"/g" /usr/local/etc/php/php.ini
+  fi
 fi
 
 echo "# PHP_ENABLE_OAUTH: ${PHP_ENABLE_OAUTH}"
-if [[ ${PHP_ENABLE_OAUTH} == 'yes' ]]; then
-  sed -i "s/^;extension=\"oauth.so\"/extension=\"oauth.so\"/g" /usr/local/etc/php/php.ini
-else
-  sed -i "s/^extension=\"oauth.so\"/;extension=\"oauth.so\"/g" /usr/local/etc/php/php.ini
+if [[ -f /usr/local/etc/php/php.ini ]]; then
+  if [[ ${PHP_ENABLE_OAUTH} == 'yes' ]]; then
+    sed -i "s/^;extension=\"oauth.so\"/extension=\"oauth.so\"/g" /usr/local/etc/php/php.ini
+  else
+    sed -i "s/^extension=\"oauth.so\"/;extension=\"oauth.so\"/g" /usr/local/etc/php/php.ini
+  fi
 fi
 
 set +x
