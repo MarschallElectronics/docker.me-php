@@ -27,13 +27,13 @@ wget -P /tmp/ http://ftp.de.debian.org/debian/pool/main/libo/libonig/libonig-dev
   && dpkg -i /tmp/libonig-dev_6.9.1-1_amd64.deb \
   && docker-php-ext-install mbstring
 
-echo "# install: gmp" # @todo gmp überall einbauen
+echo "# install: gmp" #
 echo "-------------------------------"
 apt-get install -y libgmp-dev \
   && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
   && docker-php-ext-install -j$(nproc) gmp
 
-echo "# install: imagick" # @todo imagick überall einbauen
+echo "# install: imagick" #
 echo "-------------------------------"
 apt-get -y install libmagickwand-dev --no-install-recommends \
   && printf "\n" | pecl install imagick \
