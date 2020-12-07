@@ -31,8 +31,4 @@ apt-get update \
 	&& locale-gen \
 	&& apt-get update \
 	&& apt-get -y --no-install-recommends install msodbcsql unixodbc-dev \
-	&& docker-php-ext-install pdo pdo_mysql mysqli iconv mbstring \
-	&& pecl install sqlsrv-5.6.1 pdo_sqlsrv-5.6.1 xdebug \
-	&& docker-php-ext-enable sqlsrv pdo_sqlsrv xdebug \
-	&& a2enmod rewrite \
-	&& a2dissite 000-default
+	&& pecl install sqlsrv-5.6.1 pdo_sqlsrv-5.6.1 xdebug

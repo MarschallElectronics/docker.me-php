@@ -134,6 +134,12 @@ fi
 
 # SQLSRV (alt: docker-php-ext-sqlsrv.ini, neu: php.ini)
 echo "# PHP_ENABLE_SQLSRV: ${PHP_ENABLE_SQLSRV}"
+
+# Zend-Extension nicht laden
+sed -i "s/^zend_extension=\"sqlsrv.so\"/;zend_extension=\"sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+sed -i "s/^zend_extension=\"pdo_sqlsrv.so\"/;zend_extension=\"pdo_sqlsrv.so\"/g" /usr/local/etc/php/php.ini
+
+# Extension laden oder nicht
 if [[ ${PHP_ENABLE_SQLSRV} == 'yes' ]]; then
   if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini ]]; then
       sed -i "s/^;extension=/extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
@@ -152,6 +158,7 @@ else
   fi
 fi
 
+# PHP_ENABLE_IMAGICK
 echo "# PHP_ENABLE_IMAGICK: ${PHP_ENABLE_IMAGICK}"
 if [[ -f /usr/local/etc/php/php.ini ]]; then
   if [[ ${PHP_ENABLE_IMAGICK} == 'yes' ]]; then
@@ -161,6 +168,7 @@ if [[ -f /usr/local/etc/php/php.ini ]]; then
   fi
 fi
 
+# PHP_ENABLE_APCU
 echo "# PHP_ENABLE_APCU: ${PHP_ENABLE_APCU}"
 if [[ -f /usr/local/etc/php/php.ini ]]; then
   if [[ ${PHP_ENABLE_APCU} == 'yes' ]]; then
@@ -170,6 +178,7 @@ if [[ -f /usr/local/etc/php/php.ini ]]; then
   fi
 fi
 
+# PHP_ENABLE_OAUTH
 echo "# PHP_ENABLE_OAUTH: ${PHP_ENABLE_OAUTH}"
 if [[ -f /usr/local/etc/php/php.ini ]]; then
   if [[ ${PHP_ENABLE_OAUTH} == 'yes' ]]; then
