@@ -33,12 +33,12 @@ apt-get install -y libgmp-dev \
   && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
   && docker-php-ext-install -j$(nproc) gmp
 
-echo "# install: imagick" #
-echo "-------------------------------"
-apt-get -y install libmagickwand-dev --no-install-recommends \
-  && printf "\n" | pecl install imagick \
-  && docker-php-ext-enable imagick \
-  && rm -r /var/lib/apt/lists/*
+#echo "# install: imagick" #
+#echo "-------------------------------"
+#apt-get -y install libmagickwand-dev --no-install-recommends \
+#  && printf "\n" | pecl install imagick \
+#  && docker-php-ext-enable imagick \
+#  && rm -r /var/lib/apt/lists/*
 
 #echo "# install: sqlsrv pdo_sqlsrv"
 #echo "-------------------------------"
