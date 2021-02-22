@@ -40,6 +40,7 @@ apt-get -y install libmagickwand-dev --no-install-recommends \
   && docker-php-ext-enable imagick \
   && rm -r /var/lib/apt/lists/*
 
+# @todo /opt/mssql-tools/bin/sqlcmd link machen
 echo "# install: sqlsrv pdo_sqlsrv"
 echo "-------------------------------"
 export ACCEPT_EULA=Y
@@ -51,4 +52,7 @@ curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
 	&& pecl install sqlsrv \
   && docker-php-ext-enable sqlsrv \
 	&& pecl install pdo_sqlsrv \
-	&& docker-php-ext-enable pdo_sqlsrv
+	&& docker-php-ext-enable pdo_sqlsrv \
+	& ln -s /opt/mssql-tools/bin/sqlcmd /usr/local/bin/sqlcmd
+
+

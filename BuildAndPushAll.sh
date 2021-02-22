@@ -7,4 +7,5 @@ bash BuildAndPush.sh Dockerfile-5.6-apache \
 && bash BuildAndPush.sh Dockerfile-7.1-apache-sqlsrv \
 && bash BuildAndPush.sh Dockerfile-7.2-apache \
 && bash BuildAndPush.sh Dockerfile-7.3-apache \
-&& bash BuildAndPush.sh Dockerfile-7.4-apache
+&& bash BuildAndPush.sh Dockerfile-7.4-apache \
+&& bash BuildAndPush.sh Dockerfile-8.0-apache
