@@ -53,6 +53,6 @@ curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
   && docker-php-ext-enable sqlsrv \
 	&& pecl install pdo_sqlsrv \
 	&& docker-php-ext-enable pdo_sqlsrv \
-	& ln -s /opt/mssql-tools/bin/sqlcmd /usr/local/bin/sqlcmd
+	&& ln -s /opt/mssql-tools/bin/sqlcmd /usr/local/bin/sqlcmd
 
 
