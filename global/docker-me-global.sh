@@ -98,7 +98,7 @@ mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 echo "# + install PerlMagick"
 echo "-------------------------------"
-apt-get install -y perlmagick
+apt-get install -y imagemagick perlmagick
 
 echo "# + install Apache Vhost"
 echo "-------------------------------"
