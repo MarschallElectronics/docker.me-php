@@ -33,6 +33,7 @@ export POSTFIX_SMTP_SENDER
 export POSTFIX_SENDER_CANONICAL_MAPS
 export POSTFIX_SENDER_HEADER_CHANGE
 export POSTFIX_SMTPUTF8_ENABLE
+export POSTFIX_SASLAUTH_FILEMAPPED
 export RELAYHOST
 export RELAYHOST_PORT
 export DOCUMENT_ROOT
@@ -219,7 +220,7 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
   fi
 
   # SASL
-  if [[ -n "${POSTFIX_SMTP_USERNAME}" ]] && [[ -n "${POSTFIX_SMTP_PASSWORD}" ]]; then
+  if [[ ${POSTFIX_SASLAUTH_FILEMAPPED} == 'no' ]] && [[ -n "${POSTFIX_SMTP_USERNAME}" ]] && [[ -n "${POSTFIX_SMTP_PASSWORD}" ]]; then
     sed -i "s/smtp_sasl_auth_enable.*=.*/smtp_sasl_auth_enable = yes/g" /etc/postfix/main.cf
 
     if [[ ${POSTFIX_SMTP_AUTHTLS} == 'yes' ]]; then
@@ -230,6 +231,17 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
       echo "${RELAYHOST}:${RELAYHOST_PORT} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
       postmap /etc/postfix/sasl_password
     fi
+  fi
+
+  # SASL Auth-Daten ueber File-Mapping (for security-reasons)
+  if [[ ${POSTFIX_SASLAUTH_FILEMAPPED} == 'yes' ]]; then
+    sed -i "s/smtp_sasl_auth_enable.*=.*/smtp_sasl_auth_enable = yes/g" /etc/postfix/main.cf
+
+    if [[ ${POSTFIX_SMTP_AUTHTLS} == 'yes' ]]; then
+      sed -i "s/smtp_tls_security_level.*=.*/smtp_tls_security_level = encrypt/g" /etc/postfix/main.cf
+    fi
+
+    postmap /etc/postfix/sasl_password
   fi
 
   # Header-Change aktivieren
