@@ -165,6 +165,8 @@ echo "# PHP_ENABLE_IMAGICK: ${PHP_ENABLE_IMAGICK}"
 if [[ -f /usr/local/etc/php/php.ini ]]; then
   if [[ ${PHP_ENABLE_IMAGICK} == 'yes' ]]; then
     sed -i "s/^;extension=\"imagick.so\"/extension=\"imagick.so\"/g" /usr/local/etc/php/php.ini
+    #sed -i "s/<policy domain=\"coder\" rights=\"none\" pattern=\"EPS\" />/<policy domain=\"coder\" rights=\"read|write\" pattern=\"EPS\" />/g" /etc/ImageMagick-6/policy.xml
+    #sed -i "s/<policy domain=\"coder\" rights=\"none\" pattern=\"PDF\" />/<policy domain=\"coder\" rights=\"read|write\" pattern=\"PDF\" />/g" /etc/ImageMagick-6/policy.xml
   else
     sed -i "s/^extension=\"imagick.so\"/;extension=\"imagick.so\"/g" /usr/local/etc/php/php.ini
   fi
