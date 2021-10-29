@@ -6,20 +6,11 @@ echo "###############################################"
 echo "ME: install-5.6-features"
 echo "###############################################"
 
-echo "# + install diverse Apps"
-echo "-------------------------------"
-apt-get install -y mysql-client
-
 echo "# PHP-Ext: APCU 4.0.11, Mysql, Mcrypt (Deprecated in 7.2)"
 echo "-------------------------------"
 pecl install apcu-4.0.11 \
 	&& docker-php-ext-enable apcu \
 	&& docker-php-ext-install mysql mcrypt
-
-echo "# install: php gdlib"
-echo "-------------------------------"
-docker-php-ext-configure gd --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
-  && docker-php-ext-install gd && docker-php-ext-enable gd
 
 echo "# Install Xdebug für PHP5"
 curl -fsSL 'https://xdebug.org/files/xdebug-2.4.0.tgz' -o xdebug.tar.gz \

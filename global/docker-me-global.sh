@@ -53,7 +53,6 @@ pear config-set php_ini /usr/local/etc/php/php.ini \
   && docker-php-ext-install xml && docker-php-ext-enable xml \
   && docker-php-ext-install soap && docker-php-ext-enable soap \
   && docker-php-ext-install session && docker-php-ext-enable session \
-  && docker-php-ext-install readline && docker-php-ext-enable readline \
   && docker-php-ext-install pspell && docker-php-ext-enable pspell \
   && docker-php-ext-install ldap && docker-php-ext-enable ldap \
   && docker-php-ext-install exif && docker-php-ext-enable exif \
@@ -82,21 +81,12 @@ wget -O /tmp/composer-setup.php --no-check-certificate 'https://getcomposer.org/
   && rm /tmp/composer-setup.php \
   && rm /tmp/composer-setup.sig
 
-echo "# + install NodeJS"
-echo "-------------------------------"
-curl -sL https://deb.nodesource.com/setup_10.x | bash -
-apt-get install -y nodejs
-
-echo "# + install Yarn Paketmanager"
-echo "-------------------------------"
-npm install --global yarn
-
 echo "# + install Symfony"
 echo "-------------------------------"
 wget https://get.symfony.com/cli/installer -O - | bash
 mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
-echo "# + install PerlMagick"
+echo "# + install imagemagick + PerlMagick"
 echo "-------------------------------"
 apt-get install -y imagemagick perlmagick
 
