@@ -12,8 +12,9 @@ apt-get install -y mariadb-client-10.3
 
 echo "# + nodejs + npm"
 echo "-------------------------------"
-su -c 'curl -sL https://deb.nodesource.com/setup_16.x | bash -' \
-  && apt-get install -y nodejs npm
+apt-get install -y npm \
+  && su -c 'curl -sL https://deb.nodesource.com/setup_16.x | bash -' \
+  && apt-get install -y nodejs
 
 echo "# + install Yarn Paketmanager"
 echo "-------------------------------"
