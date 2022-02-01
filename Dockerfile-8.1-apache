@@ -1,0 +1,71 @@
+FROM php:8.1-apache-bullseye
+MAINTAINER Bene Reuthlinger <br@garmisch.net>
+
+ENV TZ="Europe/Berlin"
+ENV DOCKER_HOST_IP="127.0.0.1"
+ENV MYHOSTNAME="docker.garmisch.net"
+ENV SERVER_NAME="docker.garmisch.net"
+ENV RELAYHOST="mx2.garmisch.net"
+ENV RELAYHOST_PORT="25"
+ENV POSTFIX_MYHOSTNAME="docker.garmisch.net"
+ENV POSTFIX_MYDESTINATION="localhost.localdomain, localhost"
+ENV POSTFIX_SMTP_USERNAME=""
+ENV POSTFIX_SMTP_PASSWORD=""
+ENV POSTFIX_SMTP_AUTHTLS=""
+ENV POSTFIX_SMTP_SENDER=""
+ENV POSTFIX_SENDER_CANONICAL_MAPS="no"
+ENV POSTFIX_SENDER_HEADER_CHANGE="no"
+ENV POSTFIX_SMTPUTF8_ENABLE=""
+ENV POSTFIX_SASLAUTH_FILEMAPPED="no"
+ENV POSTFIX_SASL_ENCRYPTION="tls"
+ENV DOCUMENT_ROOT=""
+ENV ALIASES=""
+ENV REMOTE_IP_PROXY=""
+ENV START_RSYSLOGD="no"
+ENV START_CROND="no"
+ENV START_POSTFIX="yes"
+ENV START_ME_AUTOSTART="yes"
+ENV APACHE_TIMEOUT="300"
+ENV SSL_VHOST="no"
+ENV SSL_CERT=""
+ENV SSL_CACERT=""
+ENV SSL_PRIVATEKEY=""
+ENV PHP_ENABLE_XDEBUG="no"
+ENV PHP_ENABLE_SQLSRV="no"
+ENV PHP_ENABLE_IMAGICK="no"
+ENV PHP_ENABLE_APCU="no"
+ENV PHP_ENABLE_OAUTH="no"
+ENV ADMIN_MAILADDRESS="webteam@garmisch.net"
+
+# Config- und Script-Files
+COPY ./global/config/php.ini /usr/local/etc/php/php.ini
+COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
+COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
+COPY ./global/config/myapache.conf /etc/apache2/conf-enabled/myapache.conf
+COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
+COPY ./global/docker-me-debian11.sh /usr/local/bin/docker-me-debian11.sh
+COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
+COPY ./8.1-apache/docker-me-8.1-features.sh /usr/local/bin/docker-me-8.1-features.sh
+COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
+COPY ./global/config/me-autostart.sh /etc/me-autostart.sh
+
+# ausführbar machen
+RUN	chmod +x /usr/local/bin/docker-me-global.sh
+RUN	chmod +x /usr/local/bin/docker-me-debian11.sh
+RUN chmod +x /usr/local/bin/docker-me-8.1-features.sh
+RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
+RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
+RUN chmod +x /etc/me-autostart.sh
+
+# ausführen
+RUN /usr/local/bin/docker-me-global.sh
+RUN /usr/local/bin/docker-me-debian11.sh
+RUN /usr/local/bin/docker-me-8.1-features.sh
+RUN /usr/local/bin/docker-me-cleanup.sh
+
+# Ports freigeben
+EXPOSE 80
+EXPOSE 443
+
+ENTRYPOINT ["/usr/local/bin/docker-me-entrypoint.sh"]
+CMD ["apache2-foreground"]
