@@ -1,4 +1,4 @@
-FROM php:8.1-apache-buster
+FROM php:8.1-apache-bullseye
 MAINTAINER Bene Reuthlinger <br@garmisch.net>
 
 ENV TZ="Europe/Berlin"
@@ -43,7 +43,7 @@ COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
 COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
 COPY ./global/config/myapache.conf /etc/apache2/conf-enabled/myapache.conf
 COPY ./global/docker-me-global.sh /usr/local/bin/docker-me-global.sh
-COPY ./global/docker-me-debian10.sh /usr/local/bin/docker-me-debian10.sh
+COPY ./global/docker-me-debian11.sh /usr/local/bin/docker-me-debian11.sh
 COPY ./global/docker-me-entrypoint.sh /usr/local/bin/docker-me-entrypoint.sh
 COPY ./8.1-apache/docker-me-8.1-features.sh /usr/local/bin/docker-me-8.1-features.sh
 COPY ./global/docker-me-cleanup.sh /usr/local/bin/docker-me-cleanup.sh
@@ -51,7 +51,7 @@ COPY ./global/config/me-autostart.sh /etc/me-autostart.sh
 
 # ausführbar machen
 RUN	chmod +x /usr/local/bin/docker-me-global.sh
-RUN	chmod +x /usr/local/bin/docker-me-debian10.sh
+RUN	chmod +x /usr/local/bin/docker-me-debian11.sh
 RUN chmod +x /usr/local/bin/docker-me-8.1-features.sh
 RUN chmod +x /usr/local/bin/docker-me-entrypoint.sh
 RUN	chmod +x /usr/local/bin/docker-me-cleanup.sh
@@ -59,7 +59,7 @@ RUN chmod +x /etc/me-autostart.sh
 
 # ausführen
 RUN /usr/local/bin/docker-me-global.sh
-RUN /usr/local/bin/docker-me-debian10.sh
+RUN /usr/local/bin/docker-me-debian11.sh
 RUN /usr/local/bin/docker-me-8.1-features.sh
 RUN /usr/local/bin/docker-me-cleanup.sh
 
