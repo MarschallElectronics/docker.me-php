@@ -3,22 +3,22 @@
 set -ex
 
 echo "###############################################"
-echo "ME: Install for Debian 11"
+echo "ME: Install for Debian 11" # @todo
 echo "###############################################"
 
 #echo "# + install mysqlclient"
 #echo "-------------------------------"
 #apt-get install -y mariadb-client-10.3
 
-echo "# + nodejs + npm"
-echo "-------------------------------"
-apt-get install -y npm \
-  && su -c 'curl -sL https://deb.nodesource.com/setup_16.x | bash -' \
-  && apt-get install -y nodejs
-
-echo "# + install Yarn Paketmanager"
-echo "-------------------------------"
-npm install --global yarn
+#echo "# + nodejs + npm"
+#echo "-------------------------------"
+#apt-get install -y npm \
+#  && su -c 'curl -sL https://deb.nodesource.com/setup_16.x | bash -' \
+#  && apt-get install -y nodejs
+#
+#echo "# + install Yarn Paketmanager"
+#echo "-------------------------------"
+#npm install --global yarn
 
 #echo "# install: php apcu, iconv, mbstring"
 #echo "-------------------------------"
