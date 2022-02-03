@@ -6,8 +6,15 @@ echo "###############################################"
 echo "ME: install-7.0-features"
 echo "###############################################"
 
-echo "# PHP-Ext: APCU, iconv, mbstring, Mcrypt (Deprecated in 7.2)"
+echo "# PHP-Ext: Xdebug 2.9.8"
+echo "-------------------------------"
+pecl install xdebug-2.9.8
+
+echo "# PHP-Ext: APCU"
 echo "-------------------------------"
 pecl install apcu \
-	&& docker-php-ext-enable apcu \
-	&& docker-php-ext-install iconv mbstring mcrypt
+&& docker-php-ext-enable apcu
+
+echo "# PHP-Ext: iconv, mbstring, Mcrypt (Deprecated in 7.2)"
+echo "-------------------------------"
+docker-php-ext-install iconv mbstring mcrypt

@@ -6,6 +6,10 @@ echo "###############################################"
 echo "ME: install-7.2-features"
 echo "###############################################"
 
+echo "# PHP-Ext: Xdebug 2.9.8"
+echo "-------------------------------"
+pecl install xdebug-2.9.8
+
 echo "# install: php apcu, iconv, mbstring"
 echo "-------------------------------"
 pecl install apcu \

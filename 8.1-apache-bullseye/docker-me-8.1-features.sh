@@ -6,6 +6,10 @@ echo "###############################################"
 echo "ME: install-7.4-features"
 echo "###############################################"
 
+echo "# PHP-Ext: Xdebug 3.1.3"
+echo "-------------------------------"
+pecl install xdebug-3.1.3
+
 echo "# install: imagick" #
 echo "-------------------------------"
 apt-get -y install libmagickwand-dev --no-install-recommends \

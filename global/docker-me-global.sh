@@ -57,7 +57,6 @@ pear config-set php_ini /usr/local/etc/php/php.ini \
   && docker-php-ext-install ldap && docker-php-ext-enable ldap \
   && docker-php-ext-install exif && docker-php-ext-enable exif \
   && docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-ext-enable intl \
-  && pecl install xdebug-2.9.8 \
   && pecl install oauth \
   && pear install DB \
   && pear install DB_Dataobject
