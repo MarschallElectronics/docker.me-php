@@ -40,7 +40,9 @@ echo "de_DE.UTF-8 UTF-8" > /etc/locale.gen \
 echo "# + install PHP-Extensions: GD, Mysql, Mysqli, Soap, Xdebug, ..."
 echo "-------------------------------"
 pear config-set php_ini /usr/local/etc/php/php.ini \
-  && docker-php-ext-install pdo pdo_mysql pdo_sqlite && docker-php-ext-enable pdo pdo_mysql pdo_sqlite \
+  && docker-php-ext-install pdo && docker-php-ext-enable pdo \
+  && docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql \
+  && docker-php-ext-install pdo_sqlite && docker-php-ext-enable pdo_sqlite \
   && docker-php-ext-install mysqli && docker-php-ext-enable mysqli \
   && docker-php-ext-install soap && docker-php-ext-enable soap \
   && docker-php-ext-install pcntl && docker-php-ext-enable pcntl \
@@ -49,9 +51,7 @@ pear config-set php_ini /usr/local/etc/php/php.ini \
   && docker-php-ext-install bcmath && docker-php-ext-enable bcmath \
   && docker-php-ext-install opcache && docker-php-ext-enable opcache \
   && docker-php-ext-install simplexml && docker-php-ext-enable simplexml \
-  && docker-php-ext-install xmlrpc && docker-php-ext-enable xmlrpc \
   && docker-php-ext-install xml && docker-php-ext-enable xml \
-  && docker-php-ext-install soap && docker-php-ext-enable soap \
   && docker-php-ext-install session && docker-php-ext-enable session \
   && docker-php-ext-install pspell && docker-php-ext-enable pspell \
   && docker-php-ext-install ldap && docker-php-ext-enable ldap \

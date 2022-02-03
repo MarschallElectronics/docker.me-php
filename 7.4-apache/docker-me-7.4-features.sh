@@ -10,6 +10,10 @@ echo "# PHP-Ext: Xdebug 2.9.8"
 echo "-------------------------------"
 pecl install xdebug-2.9.8
 
+echo "# PHP-Ext: xmlrpc (funzt bis PHP 7.4)"
+echo "-------------------------------"
+docker-php-ext-install xmlrpc && docker-php-ext-enable xmlrpc
+
 echo "# install: imagick" #
 echo "-------------------------------"
 apt-get -y install libmagickwand-dev --no-install-recommends \

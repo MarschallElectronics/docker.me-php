@@ -6,6 +6,14 @@ echo "###############################################"
 echo "ME: install-5.6-features"
 echo "###############################################"
 
+echo "# PHP-Ext: Xdebug 2.9.8"
+echo "-------------------------------"
+pecl install xdebug-2.9.8
+
+echo "# PHP-Ext: xmlrpc (funzt bis PHP 7.4)"
+echo "-------------------------------"
+docker-php-ext-install xmlrpc && docker-php-ext-enable xmlrpc
+
 echo "# PHP-Ext: APCU 4.0.11, Mysql, Mcrypt (Deprecated in 7.2)"
 echo "-------------------------------"
 pecl install apcu-4.0.11 \
