@@ -10,11 +10,14 @@ echo "# + install mysqlclient"
 echo "-------------------------------"
 apt-get install -y mariadb-client-10.5
 
-echo "# + nodejs + npm"
+echo "# + npm"
 echo "-------------------------------"
-apt-get install -y npm \
-  && curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - \
-  && apt-get install -y nodejs
+apt-get install -y npm
+
+#echo "# + nodejs" # @todo
+#echo "-------------------------------"
+#curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - \
+#&& apt-get install -y nodejs
 
 echo "# + install Yarn Paketmanager"
 echo "-------------------------------"
