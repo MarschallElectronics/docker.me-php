@@ -39,7 +39,7 @@ ENV ADMIN_MAILADDRESS="webteam@garmisch.net"
 
 # Config- und Script-Files
 COPY ./global/config/php.ini /usr/local/etc/php/php.ini
-COPY ./global/config/php-xdebug-3.ini /usr/local/etc/php/conf.d/docker-php-xdebug-3.ini
+COPY ./global/config/aa-php-xdebug-3.ini /usr/local/etc/php/conf.d/aa-php-xdebug-3.ini
 COPY ./global/config/vhost.conf /etc/apache2/sites-available/vhost.conf
 COPY ./global/config/sslvhost.conf /etc/apache2/sites-available/sslvhost.conf
 COPY ./global/config/myapache.conf /etc/apache2/conf-enabled/myapache.conf
