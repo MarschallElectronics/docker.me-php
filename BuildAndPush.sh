@@ -17,7 +17,7 @@ else
 fi
 
 # latest
-if [ "${TAG}" == "7.4-apache" ]
+if [ "${TAG}" == "8.1-apache" ]
 then
 	docker build --no-cache -t marschallelectronics/me-php:latest -f "${DOCKERFILE}" . || exit 1
 	docker push marschallelectronics/me-php:latest || exit 1
