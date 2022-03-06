@@ -85,7 +85,7 @@ echo "###############################################"
 set -x
 
 # aliases
-if [[ -n "${ADMIN_MAILADDRESS}" ]]; then
+if ! grep "^root:" /etc/aliases -q && [[ -n "${ADMIN_MAILADDRESS}" ]]; then
   echo "root:$ADMIN_MAILADDRESS" >> /etc/aliases
   newaliases
 fi
