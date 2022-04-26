@@ -396,7 +396,7 @@ if [[ ${SSL_VHOST} == 'yes' ]] && [[ -f /etc/apache2/sites-available/sslvhost.co
   echo "###############################################"
   set -x
 
-  if [[ -n "${APACHE_TIMEOUT}" ]]; then
+  if [[ -n "${APACHE_TIMEOUT}" ]] && [[ ${APACHE_TIMEOUT} != '300' ]]; then
     sed -i "s|Timeout.*|Timeout ${APACHE_TIMEOUT}|g" /etc/apache2/sites-available/sslvhost.conf
   fi
 
