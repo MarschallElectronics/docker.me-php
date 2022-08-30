@@ -125,12 +125,22 @@ if [[ ${PHP_ENABLE_XDEBUG} == 'yes' ]]; then
   if [[ -f /usr/local/etc/php/php.ini ]]; then
     sed -i "s/^;zend_extension=\"xdebug.so\"/zend_extension=\"xdebug.so\"/g" /usr/local/etc/php/php.ini
   fi
+
+  # für php 8: xdebug3 aktivieren
+  if [[ -f /usr/local/etc/php/conf.d/aa-php-xdebug-3.ini ]]; then
+    sed -i "s/xdebug.mode=off/xdebug.mode=debug/g" /usr/local/etc/php/conf.d/aa-php-xdebug-3.ini
+  fi
 else
   if [[ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ]]; then
     sed -i "s/^zend_extension=/;zend_extension=/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
   fi
   if [[ -f /usr/local/etc/php/php.ini ]]; then
     sed -i "s/^zend_extension=\"xdebug.so\"/;zend_extension=\"xdebug.so\"/g" /usr/local/etc/php/php.ini
+  fi
+
+  # für php 8: xdebug3 deaktivieren
+  if [[ -f /usr/local/etc/php/conf.d/aa-php-xdebug-3.ini ]]; then
+    sed -i "s/xdebug.mode=/xdebug.mode=off/g" /usr/local/etc/php/conf.d/aa-php-xdebug-3.ini
   fi
 fi
 
