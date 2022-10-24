@@ -3,7 +3,7 @@
 set -ex
 
 echo "###############################################"
-echo "ME: install-7.4-features"
+echo "ME: install-8.0-features"
 echo "###############################################"
 
 echo "# PHP-Ext: Xdebug 3.1.3"
