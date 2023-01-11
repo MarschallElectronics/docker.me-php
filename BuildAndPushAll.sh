@@ -21,4 +21,6 @@ echo -e "---------------------\n5.6-apache:\n---------------------\n\n" \
 && echo -e "---------------------\n8.1-apache:\n---------------------\n\n" \
 && bash BuildAndPush.sh Dockerfile-8.1-apache \
 && echo -e "---------------------\n8.1-apache-bullseye:\n---------------------\n\n" \
-&& bash BuildAndPush.sh Dockerfile-8.1-apache-bullseye
+&& bash BuildAndPush.sh Dockerfile-8.1-apache-bullseye \
+&& echo -e "---------------------\n8.2-apache:\n---------------------\n\n" \
+&& bash BuildAndPush.sh Dockerfile-8.2-apache
