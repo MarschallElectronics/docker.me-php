@@ -74,6 +74,9 @@ echo "# Diverses"
 echo "###############################################"
 set -x
 
+# User ausgeben
+echo "User: $(whoami)"
+
 # Rechte für crontab setzen
 chmod 744 /etc/crontab
 chown root:root /etc/crontab
@@ -242,6 +245,8 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
 
     if [[ -n "${POSTFIX_SMTP_USERNAME}" ]] && [[ -n "${RELAYHOST}" ]]; then
       echo "${RELAYHOST}:${RELAYHOST_PORT} ${POSTFIX_SMTP_USERNAME}:${POSTFIX_SMTP_PASSWORD}" > /etc/postfix/sasl_password
+      chown root:root /etc/postfix/sasl_password
+      chmod 0600 /etc/postfix/sasl_password
       postmap /etc/postfix/sasl_password
     fi
   fi
@@ -254,6 +259,8 @@ if [[ -f /etc/postfix/main.cf ]] && [[ -z "$(mount | grep /etc/postfix/main.cf)"
       sed -i "s/smtp_tls_security_level.*=.*/smtp_tls_security_level = encrypt/g" /etc/postfix/main.cf
     fi
 
+    chown root:root /etc/postfix/sasl_password
+    chmod 0600 /etc/postfix/sasl_password
     postmap /etc/postfix/sasl_password
   fi
 
