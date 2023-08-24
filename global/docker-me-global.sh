@@ -68,6 +68,10 @@ a2enmod rewrite \
   && a2enmod remoteip \
   && a2enmod headers \
   && echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf \
+  && echo "RemoteIPTrustedProxy 10.0.0.0/8" >> /etc/apache2/conf-available/remoteip.conf \
+  && echo "RemoteIPTrustedProxy 172.16.0.0/12" >> /etc/apache2/conf-available/remoteip.conf \
+  && echo "RemoteIPTrustedProxy 192.168.0.0/16" >> /etc/apache2/conf-available/remoteip.conf \
+  && echo "RemoteIPTrustedProxy 81.201.32.0/20" >> /etc/apache2/conf-available/remoteip.conf \
   && echo "RemoteIPTrustedProxy 127.0.0.1" >> /etc/apache2/conf-available/remoteip.conf \
   && a2enconf remoteip
 

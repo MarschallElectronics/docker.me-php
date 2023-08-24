@@ -325,7 +325,7 @@ if [[ -f /etc/apache2/conf-available/remoteip.conf ]] && [[ -z "$(mount | grep /
   fi
 
   if [[ -n "${REMOTE_IP_PROXY}" ]]; then
-    sed -i "s/RemoteIPTrustedProxy.*/RemoteIPTrustedProxy ${REMOTE_IP_PROXY}/g" /etc/apache2/conf-available/remoteip.conf
+    sed -i "s/RemoteIPTrustedProxy 127\.0\.0\.1/RemoteIPTrustedProxy ${REMOTE_IP_PROXY}/g" /etc/apache2/conf-available/remoteip.conf
   fi
 fi
 
