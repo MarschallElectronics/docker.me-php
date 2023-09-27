@@ -81,13 +81,24 @@ echo "User: $(whoami)"
 chmod 744 /etc/crontab
 chown root:root /etc/crontab
 
+# /container.env kann in crontab verwendet werden
+# https://stackoverflow.com/questions/27771781/how-can-i-access-docker-set-environment-variables-from-a-cron-job
+ENV_FILE=/container.env
+set +x
+echo "###############################################"
+echo "Exporting variables to $ENV_FILE"
+echo "Can be used in crontab with BASH_ENV=$ENV_FILE"
+echo "###############################################"
+set -x
+
+declare -p | grep -Ev 'BASHOPTS|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID' > "$ENV_FILE"
+
 set +x
 echo "###############################################"
 echo "# ALIASES auf Admin-Mail setzen"
 echo "###############################################"
 set -x
 
-# aliases
 if ! grep "^root:" /etc/aliases -q && [[ -n "${ADMIN_MAILADDRESS}" ]]; then
   echo "root:$ADMIN_MAILADDRESS" >> /etc/aliases
   newaliases
