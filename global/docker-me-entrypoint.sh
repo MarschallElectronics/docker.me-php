@@ -306,6 +306,16 @@ fi
 
 set +x
 echo "###############################################"
+echo "# SSHD starten"
+echo "###############################################"
+set -x
+
+if [[ -x /etc/init.d/ssh ]] && [[ ${START_SSHD} == 'yes' ]]; then
+  /etc/init.d/ssh start
+fi
+
+set +x
+echo "###############################################"
 echo "# Rsyslogd starten"
 echo "###############################################"
 set -x
