@@ -9,6 +9,7 @@ echo "###############################################"
 echo "# + install mysqlclient"
 echo "-------------------------------"
 apt-get install -y mariadb-client-10.5
+apt-get install -y mariadb-backup
 
 echo "# + npm"
 echo "-------------------------------"
