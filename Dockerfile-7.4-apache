@@ -66,6 +66,7 @@ RUN /usr/local/bin/docker-me-7.4-features.sh
 RUN /usr/local/bin/docker-me-cleanup.sh
 
 # Ports freigeben
+EXPOSE 22
 EXPOSE 80
 EXPOSE 443
 
