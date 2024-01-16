@@ -45,19 +45,6 @@ echo "-------------------------------"
 docker-php-ext-configure gd --with-freetype --with-jpeg --with-xpm \
   && docker-php-ext-install gd && docker-php-ext-enable gd
 
-#
-# @todo
-# dpkg: error processing package libonig-dev (--install):
-#  dependency problems - leaving unconfigured
-# Errors were encountered while processing:
-#  libonig-dev
-#
-#echo "# install: mbstring : benötigt libonig-dev (gibts nicht über apt-get)"
-#echo "-------------------------------"
-#wget -P /tmp/ http://ftp.de.debian.org/debian/pool/main/libo/libonig/libonig-dev_6.9.1-1_amd64.deb \
-#  && dpkg -i /tmp/libonig-dev_6.9.1-1_amd64.deb \
-#  && docker-php-ext-install mbstring
-
 echo "# install: gmp" #
 echo "-------------------------------"
 apt-get install -y libgmp-dev \
