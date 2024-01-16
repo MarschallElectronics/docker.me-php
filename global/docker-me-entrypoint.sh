@@ -320,8 +320,12 @@ echo "# Rsyslogd starten"
 echo "###############################################"
 set -x
 
-if [[ -x /etc/init.d/rsyslog ]] && [[ ${START_RSYSLOGD} == 'yes' ]]; then
-  /etc/init.d/rsyslog start
+if [[ ${START_RSYSLOGD} == 'yes' ]]; then
+  if [[ -x /etc/init.d/rsyslog ]]; then
+    /etc/init.d/rsyslog start
+  elif [[ -x /usr/sbin/rsyslogd ]]; then
+    /usr/sbin/rsyslogd -d
+  fi
 fi
 
 set +x

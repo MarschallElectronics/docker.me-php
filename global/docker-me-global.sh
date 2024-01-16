@@ -112,7 +112,6 @@ sed -i "s/inet_protocols.*=.*/inet_protocols = ipv4/g" /etc/postfix/main.cf
 # SASL vorbereiten
 echo "smtp_sasl_auth_enable = no" >> /etc/postfix/main.cf
 echo "smtp_sasl_security_options = noanonymous" >> /etc/postfix/main.cf
-echo "smtp_tls_security_level = none" >> /etc/postfix/main.cf
 echo "smtp_sasl_password_maps = hash:/etc/postfix/sasl_password" >> /etc/postfix/main.cf
 echo "" > /etc/postfix/sasl_password
 postmap /etc/postfix/sasl_password
