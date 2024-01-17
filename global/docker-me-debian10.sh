@@ -13,9 +13,7 @@ apt-get install -y mariadb-backup
 
 echo "# + nodejs + npm"
 echo "-------------------------------"
-apt-get install -y npm \
-  && su -c 'curl -sL https://deb.nodesource.com/setup_16.x | bash -' \
-  && apt-get install -y nodejs
+apt-get install -y nodejs npm
 
 echo "# + install Yarn Paketmanager"
 echo "-------------------------------"
