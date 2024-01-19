@@ -19,7 +19,7 @@ echo "# + install Yarn Paketmanager"
 echo "-------------------------------"
 npm install --global yarn
 
-echo "# install: php: apcu, iconv, mbstring"
+echo "# install: php: apcu, iconv"
 echo "-------------------------------"
 pecl install apcu \
 	&& docker-php-ext-enable apcu \

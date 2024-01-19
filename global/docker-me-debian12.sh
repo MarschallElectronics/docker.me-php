@@ -37,3 +37,8 @@ echo "-------------------------------"
 apt-get install -y libgmp-dev \
   && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
   && docker-php-ext-install -j$(nproc) gmp
+
+echo "# install: php: imap" #
+echo "-------------------------------"
+docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+  && docker-php-ext-install -j$(nproc) imap
